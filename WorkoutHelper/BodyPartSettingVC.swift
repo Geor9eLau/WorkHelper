@@ -42,9 +42,9 @@ class BodyPartSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
     
     // MARK - Event Handler
     func addBtnDidClicked() {
-        if self.chosenParts.count < ALL_BODY_PART_CHOICES.count {
+//        if self.chosenParts.count < ALL_BODY_PART_CHOICES.count {
             view.addSubview(self.chooseView)
-        }
+//        }
     }
     
     // MARK: - UITableViewDelegate

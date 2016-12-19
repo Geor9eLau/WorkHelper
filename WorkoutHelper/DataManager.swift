@@ -8,7 +8,18 @@
 
 import Foundation
 
-class DataManager: NSObject {
+public let ALL_BODY_PART_CHOICES: [BodyPart] = [.leg, .shoulder, .back]
+public let ALL_BACK_MOTION_CHOICES: [BackMotion] = [.motion1, .motion2, .motion3]
+public let ALL_LEG_MOTION_CHOICES: [LegMotion] = [.motion1, .motion2, .motion3]
+public let ALL_SHOULDER_MOTION_CHOICES: [ShoulderMotion] = [.motion1, .motion2, .motion3]
+
+
+fileprivate let KEY_USER_CHOSEN_PARTS = "USER_CHOSEN_PARTS"
+fileprivate let KEY_USER_CHOSEN_BACK_MOTIONS = "KEY_USER_CHOSEN_BACK_MOTIONS"
+fileprivate let KEY_USER_CHOSEN_LEG_MOTIONS = "KEY_USER_CHOSEN_LEG_MOTIONS"
+fileprivate let KEY_USER_CHOSEN_SHOULDER_MOTIONS = "KEY_USER_CHOSEN_SHOULDER_MOTIONS"
+
+public class DataManager: NSObject {
     static var userChosenParts: [BodyPart] {
         if let chosenPartsData = UserDefaults.standard.data(forKey: KEY_USER_CHOSEN_PARTS){
             let storer = NSKeyedUnarchiver.unarchiveObject(with: chosenPartsData) as! chosenPartsStorer
@@ -66,9 +77,14 @@ class DataManager: NSObject {
         }
         UserDefaults.standard.synchronize()
     }
+    
+    
 }
 
-class chosenPartsStorer: NSObject, NSCoding {
+// TODO: - Storer Helper Class -
+
+
+fileprivate class chosenPartsStorer: NSObject, NSCoding {
     var chosenParts: [BodyPart]
     
     init(chosenParts: [BodyPart]) {
@@ -84,7 +100,7 @@ class chosenPartsStorer: NSObject, NSCoding {
     }
 }
 
-class chosenLegMotionsStorer: NSObject, NSCoding {
+fileprivate class chosenLegMotionsStorer: NSObject, NSCoding {
     var chosenLegMotions: [LegMotion]
     
     init(chosenMotions: [LegMotion]) {
@@ -100,7 +116,7 @@ class chosenLegMotionsStorer: NSObject, NSCoding {
     }
 }
 
-class chosenBackMotionsStorer: NSObject, NSCoding {
+fileprivate class chosenBackMotionsStorer: NSObject, NSCoding {
     var chosenBackMotions: [BackMotion]
     
     init(chosenMotions: [BackMotion]) {
@@ -116,7 +132,7 @@ class chosenBackMotionsStorer: NSObject, NSCoding {
     }
 }
 
-class chosenShoulderMotionsStorer: NSObject, NSCoding {
+fileprivate class chosenShoulderMotionsStorer: NSObject, NSCoding {
     var chosenShoulderMotions: [ShoulderMotion]
     
     init(chosenMotions: [ShoulderMotion]) {
