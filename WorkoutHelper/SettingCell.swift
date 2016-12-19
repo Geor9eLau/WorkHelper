@@ -11,7 +11,7 @@ import UIKit
 class SettingCell: UITableViewCell {
 
     @IBOutlet weak var numLbl: UILabel!
-    @IBOutlet weak var partLbl: UILabel!
+    @IBOutlet weak var nameLbl: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()

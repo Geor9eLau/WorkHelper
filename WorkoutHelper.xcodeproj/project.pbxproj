@@ -27,6 +27,7 @@
 		5E9F54161E011D2900D1E9C0 /* MotionSettingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F54151E011D2900D1E9C0 /* MotionSettingVC.swift */; };
 		5E9F54181E011EB900D1E9C0 /* BodyPartSettingVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E9F54171E011EB900D1E9C0 /* BodyPartSettingVC.xib */; };
 		5E9F541D1E022E1500D1E9C0 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F541C1E022E1500D1E9C0 /* Extension.swift */; };
+		5EBED2841E07D0010039415E /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EBED2831E07D0010039415E /* DataManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +74,7 @@
 		5E9F54151E011D2900D1E9C0 /* MotionSettingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionSettingVC.swift; sourceTree = "<group>"; };
 		5E9F54171E011EB900D1E9C0 /* BodyPartSettingVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BodyPartSettingVC.xib; sourceTree = "<group>"; };
 		5E9F541C1E022E1500D1E9C0 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		5EBED2831E07D0010039415E /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -130,11 +132,11 @@
 				5E9F53CD1DFFA38400D1E9C0 /* Assets.xcassets */,
 				5E9F53CF1DFFA38400D1E9C0 /* LaunchScreen.storyboard */,
 				5E9F53D21DFFA38400D1E9C0 /* Info.plist */,
+				5E9F53F71DFFD41E00D1E9C0 /* BaseViewController.swift */,
 				5E9F54191E022DEE00D1E9C0 /* Extension */,
 				5E9F54101E00F96F00D1E9C0 /* Util */,
 				5E9F53FB1DFFDB4100D1E9C0 /* BodyPartSetting */,
 				5E9F53F61DFFD3FF00D1E9C0 /* Model */,
-				5E9F53F71DFFD41E00D1E9C0 /* BaseViewController.swift */,
 				5E9F540B1E00DDD900D1E9C0 /* CustomView */,
 			);
 			path = WorkoutHelper;
@@ -189,6 +191,7 @@
 			isa = PBXGroup;
 			children = (
 				5E9F54111E00F97800D1E9C0 /* Util.swift */,
+				5EBED2831E07D0010039415E /* DataManager.swift */,
 			);
 			name = Util;
 			sourceTree = "<group>";
@@ -371,6 +374,7 @@
 				5E9F53FA1DFFD4DD00D1E9C0 /* BodyPartSettingVC.swift in Sources */,
 				5E9F54121E00F97800D1E9C0 /* Util.swift in Sources */,
 				5E9F54031DFFDF9E00D1E9C0 /* GloabalDefine.swift in Sources */,
+				5EBED2841E07D0010039415E /* DataManager.swift in Sources */,
 				5E9F53C71DFFA38400D1E9C0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -620,6 +624,7 @@
 				5E9F53ED1DFFA38400D1E9C0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5E9F53EE1DFFA38400D1E9C0 /* Build configuration list for PBXNativeTarget "WorkoutHelperTests" */ = {
 			isa = XCConfigurationList;
@@ -628,6 +633,7 @@
 				5E9F53F01DFFA38400D1E9C0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		5E9F53F11DFFA38400D1E9C0 /* Build configuration list for PBXNativeTarget "WorkoutHelperUITests" */ = {
 			isa = XCConfigurationList;
@@ -636,6 +642,7 @@
 				5E9F53F31DFFA38400D1E9C0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

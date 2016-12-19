@@ -29,6 +29,10 @@ public let USER_CHOSEN_PARTS: [BodyPart] = {
     if let tmp = UserDefaults.standard.object(forKey: KEY_USER_CHOSEN_PARTS){
         return UserDefaults.standard.object(forKey: KEY_USER_CHOSEN_PARTS) as! [BodyPart]
     }
+    
+    
+    UserDefaults.standard.set([ALL_BODY_PART_CHOICES.first!], forKey: KEY_USER_CHOSEN_PARTS)
+    UserDefaults.standard.synchronize()
     return [ALL_BODY_PART_CHOICES.first!]
 }()
 
@@ -36,6 +40,9 @@ public let USER_CHOSEN_BACK_MOTION: [BackMotion] = {
     if let tmp = UserDefaults.standard.object(forKey: KEY_USER_CHOSEN_BACK_MOTIONS){
         return UserDefaults.standard.object(forKey: KEY_USER_CHOSEN_BACK_MOTIONS) as! [BackMotion]
     }
+    
+    UserDefaults.standard.set([ALL_BACK_MOTION_CHOICES.first!], forKey: KEY_USER_CHOSEN_BACK_MOTIONS)
+    UserDefaults.standard.synchronize()
     return [ALL_BACK_MOTION_CHOICES.first!]
 }()
 
@@ -43,6 +50,8 @@ public let USER_CHOSEN_LEG_MOTION: [LegMotion] = {
     if let tmp = UserDefaults.standard.object(forKey: KEY_USER_CHOSEN_LEG_MOTIONS){
         return UserDefaults.standard.object(forKey: KEY_USER_CHOSEN_LEG_MOTIONS) as! [LegMotion]
     }
+    UserDefaults.standard.set([ALL_LEG_MOTION_CHOICES.first!], forKey: KEY_USER_CHOSEN_LEG_MOTIONS)
+    UserDefaults.standard.synchronize()
     return [ALL_LEG_MOTION_CHOICES.first!]
 }()
 
@@ -50,6 +59,8 @@ public let USER_CHOSEN_SHOULDER_MOTION: [ShoulderMotion] = {
     if let tmp = UserDefaults.standard.object(forKey: KEY_USER_CHOSEN_SHOULDER_MOTIONS){
         return UserDefaults.standard.object(forKey: KEY_USER_CHOSEN_SHOULDER_MOTIONS) as! [ShoulderMotion]
     }
+    UserDefaults.standard.set([ALL_SHOULDER_MOTION_CHOICES.first!], forKey: KEY_USER_CHOSEN_SHOULDER_MOTIONS)
+    UserDefaults.standard.synchronize()
     return [ALL_SHOULDER_MOTION_CHOICES.first!]
 }()
 

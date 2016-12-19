@@ -12,10 +12,13 @@ public enum BodyPart: String {
     case leg
     case back
     case shoulder
+    static public func ==(lhs: BodyPart, rhs: BodyPart) -> Bool{
+        return lhs.rawValue == rhs.rawValue
+    }
 }
 
 public enum LegMotion: String, PartMotion{
-    public var type: BodyPart {
+    public var part: BodyPart {
         return .leg
     }
     
@@ -25,11 +28,15 @@ public enum LegMotion: String, PartMotion{
     case motion1
     case motion2
     case motion3
+    
+    static public func ==(lhs: LegMotion, rhs: LegMotion) -> Bool{
+        return lhs.motionName == rhs.motionName
+    }
 }
 
 public enum BackMotion: String, PartMotion{
     
-    public var type: BodyPart {
+    public var part: BodyPart {
         return .back
     }
     
@@ -40,10 +47,14 @@ public enum BackMotion: String, PartMotion{
     case motion1
     case motion2
     case motion3
+    
+    static public func ==(lhs: BackMotion, rhs: BackMotion) -> Bool{
+        return lhs.motionName == rhs.motionName
+    }
 }
 
-public enum ShoulderMotion: String, PartMotion{
-    public var type: BodyPart {
+public enum ShoulderMotion: String, PartMotion, Equatable{
+    public var part: BodyPart {
         return .shoulder
     }
     
@@ -54,10 +65,14 @@ public enum ShoulderMotion: String, PartMotion{
     case motion1
     case motion2
     case motion3
+    
+    static public func ==(lhs: ShoulderMotion, rhs: ShoulderMotion) -> Bool{
+        return lhs.motionName == rhs.motionName
+    }
 }
 
 public protocol PartMotion{
-    var type: BodyPart { get }
+    var part: BodyPart { get }
     var motionName: String { get }
 }
 
@@ -118,6 +133,7 @@ class Training: NSObject {
         }
     }
 }
+
 
 
 

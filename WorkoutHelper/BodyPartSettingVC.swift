@@ -13,15 +13,15 @@ class BodyPartSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
     @IBOutlet weak var customTableView: UITableView!
     
     var type: ChooseViewType = .part
-    var chosenParts: [BodyPart] = {
-        return USER_CHOSEN_PARTS
-    }()
+    private var chosenParts: [BodyPart] = DataManager.userChosenParts
     
     lazy var chooseView: CustomChooseView = {
         let tmp = CustomChooseView(CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT), type: self.type)
         tmp.delegate = self
         return tmp
     }()
+    
+    // MARK: - Life cycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -50,6 +50,10 @@ class BodyPartSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
     // MARK: - UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let chosenPart = self.chosenParts[indexPath.row]
+        let motionVc = MotionSettingVC()
+        motionVc.type = .motion(partType: chosenPart)
+        navigationController?.pushViewController(motionVc, animated: true)
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
@@ -57,7 +61,9 @@ class BodyPartSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        chosenParts.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .fade)
+        DataManager.updateChosenParts(chosenParts: chosenParts)
     }
     
     // MARK: - UITableViewDataSource
@@ -68,7 +74,7 @@ class BodyPartSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell  = tableView.dequeueReusableCell(withIdentifier: "settingCell", for: indexPath) as! SettingCell
         cell.numLbl.text = "\(indexPath.row + 1)"
-        cell.partLbl.text = chosenParts[indexPath.row].rawValue
+        cell.nameLbl.text = chosenParts[indexPath.row].rawValue
         return cell
     }
     
@@ -90,10 +96,15 @@ class BodyPartSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
     }
 
     
-    // MARK - CustomChooseViewDelegate
-    func choose(item: String) {
-        chosenParts.append(BodyPart(rawValue: item)!)
-        customTableView.reloadData()
+    // MARK: - CustomChooseViewDelegate
+    func choose(item: Any) {
+        
+        if let chosenPart = item as? BodyPart{
+            chosenParts.append(chosenPart)
+            customTableView.reloadData()
+            
+            DataManager.updateChosenParts(chosenParts: chosenParts)
+        }
     }
     /*
     // MARK: - Navigation
