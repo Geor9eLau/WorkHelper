@@ -10,16 +10,25 @@ import UIKit
 
 class BodyPartSettingVC: BaseViewController, UITableViewDelegate, UITableViewDataSource, CustomChooseViewDelegate {
 
-    @IBOutlet weak var customTableView: UITableView!
-    
-    var type: ChooseViewType = .part
-    private var chosenParts: [BodyPart] = DataManager.userChosenParts
-    
-    lazy var chooseView: CustomChooseView = {
-        let tmp = CustomChooseView(CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT), type: self.type)
+    lazy var customTableView: UITableView = {
+        let tmp = UITableView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT - 150))
         tmp.delegate = self
+        tmp.dataSource = self
+        tmp.showsVerticalScrollIndicator = false
+        tmp.showsHorizontalScrollIndicator = false
+        tmp.separatorStyle = .none
+        tmp.backgroundColor = UIColor.white
         return tmp
     }()
+    
+    private lazy var doneBarBtn: UIBarButtonItem = {
+        let tmpBtn = UIBarButtonItem(title: "Done", style: .done, target: self, action: #selector(doneBtnDidClicked))
+        return tmpBtn
+    }()
+    
+    private var chosenParts: [BodyPart] = DataManager.userChosenParts
+    
+    var chooseView: CustomChooseView?
     
     // MARK: - Life cycle
     
@@ -27,6 +36,8 @@ class BodyPartSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         super.viewDidLoad()
         title = "Setting Body Part"
         self.setupTableView()
+        self.setupChooseView()
+        navigationItem.setRightBarButton(doneBarBtn, animated: true)
         // Do any additional setup after loading the view.
     }
 
@@ -36,15 +47,28 @@ class BodyPartSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
     }
     
     // MARK: - Private
+    func setupChooseView() {
+        chooseView = CustomChooseView(CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT), chooseViewType: .part, fromType: .setting)
+        chooseView!.delegate = self
+    }
+    
     func setupTableView() {
         customTableView.register(UINib.init(nibName: "SettingCell", bundle: nil) , forCellReuseIdentifier: "settingCell")
+        view.addSubview(customTableView)
     }
     
     // MARK - Event Handler
     func addBtnDidClicked() {
 //        if self.chosenParts.count < ALL_BODY_PART_CHOICES.count {
-            view.addSubview(self.chooseView)
+        if chooseView!.hasSelectableChoice {view.addSubview(chooseView!)}
+        
 //        }
+    }
+    
+    @objc func doneBtnDidClicked(){
+        UIApplication.shared.keyWindow?.rootViewController = MenuViewController()
+        UserDefaults.standard.set(true, forKey: "isFirstTime")
+        UserDefaults.standard.synchronize()
     }
     
     // MARK: - UITableViewDelegate
@@ -52,7 +76,7 @@ class BodyPartSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         tableView.deselectRow(at: indexPath, animated: true)
         let chosenPart = self.chosenParts[indexPath.row]
         let motionVc = MotionSettingVC()
-        motionVc.type = .motion(partType: chosenPart)
+        motionVc.part = chosenPart
         navigationController?.pushViewController(motionVc, animated: true)
     }
     
@@ -64,6 +88,8 @@ class BodyPartSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         chosenParts.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .fade)
         DataManager.updateChosenParts(chosenParts: chosenParts)
+        chooseView!.refreshView()
+        tableView.reloadData()
     }
     
     // MARK: - UITableViewDataSource
@@ -78,13 +104,17 @@ class BodyPartSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         return cell
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let addView = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 30))
+        if chooseView!.hasSelectableChoice == false {return nil}
+        let addView = UIView(frame: CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: 50))
         addView.backgroundColor = UIColor.clear
         
-        
         let addBtn = UIButton(type: .contactAdd)
-        addBtn.frame = CGRect(x: 5, y: 5, width: 20, height: 20)
+        addBtn.frame = CGRect(x: 20, y: 10, width: 30, height: 30)
         addBtn.addTarget(self, action: #selector(addBtnDidClicked) , for: .touchUpInside)
         addView.addSubview(addBtn)
         
@@ -92,7 +122,8 @@ class BodyPartSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 50
+        if chooseView!.hasSelectableChoice { return 50 }
+        return 0
     }
 
     
@@ -101,9 +132,9 @@ class BodyPartSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         
         if let chosenPart = item as? BodyPart{
             chosenParts.append(chosenPart)
-            customTableView.reloadData()
-            
             DataManager.updateChosenParts(chosenParts: chosenParts)
+            chooseView!.refreshView()
+            customTableView.reloadData()
         }
     }
     /*

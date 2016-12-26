@@ -78,7 +78,9 @@ public class DataManager: NSObject {
         UserDefaults.standard.synchronize()
     }
     
-    
+    var isFirstTime: Bool {
+        return UserDefaults.standard.bool(forKey: "isFirstTime")
+    }
 }
 
 // TODO: - Storer Helper Class -

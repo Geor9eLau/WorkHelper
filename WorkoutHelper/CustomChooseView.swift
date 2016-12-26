@@ -10,7 +10,7 @@ import UIKit
 
 enum ChooseViewType: ChooseViewTypeProtocol {
     
-    var choices: [Any] {
+    var settingChoices: [Any] {
         switch self{
         case .part:
             return ALL_BODY_PART_CHOICES.getSelectableParts(chosenParts: DataManager.userChosenParts)
@@ -22,6 +22,75 @@ enum ChooseViewType: ChooseViewTypeProtocol {
                 return ALL_BACK_MOTION_CHOICES.getSelectableMotions(chosenMotions: DataManager.userChosenBackMotions)
             case .shoulder:
                 return ALL_SHOULDER_MOTION_CHOICES.getSelectableMotions(chosenMotions: DataManager.userChosenShoulderMotions)
+            }
+        case let .repeats(motionType):
+            switch motionType.part {
+            case .leg:
+                switch motionType.motionName {
+                case "motion1":
+                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                default:
+                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                }
+                
+            case .back:
+                switch motionType.motionName {
+                case "motion1":
+                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                default:
+                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                }
+                
+            case .shoulder:
+                switch motionType.motionName {
+                case "motion1":
+                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                default:
+                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                }
+            }
+            
+        case let .weight(motionType):
+            switch motionType.part {
+            case .leg:
+                switch motionType.motionName {
+                case "motion1":
+                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                default:
+                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                }
+                
+            case .back:
+                switch motionType.motionName {
+                case "motion1":
+                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                default:
+                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                }
+                
+            case .shoulder:
+                switch motionType.motionName {
+                case "motion1":
+                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                default:
+                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                }
+            }
+        }
+    }
+    
+    var trainingChoices: [Any] {
+        switch self {
+        case .part:
+            return DataManager.userChosenParts
+        case let .motion(partType):
+            switch partType {
+            case .leg:
+                return DataManager.userChosenLegMotions
+            case .back:
+                return DataManager.userChosenBackMotions
+            case .shoulder:
+                return DataManager.userChosenShoulderMotions
             }
         case let .repeats(motionType):
             switch motionType.part {
@@ -195,7 +264,8 @@ enum ChooseViewType: ChooseViewTypeProtocol {
 
 
 protocol ChooseViewTypeProtocol {
-    var choices: [Any] { get }
+    var settingChoices: [Any] { get }
+    var trainingChoices: [Any] { get }
 //    var choicesForPart: [BodyPart]? { get }
 //    var choicesForMotion: [PartMotion]? { get }
 }
@@ -207,14 +277,24 @@ protocol CustomChooseViewDelegate: NSObjectProtocol {
 
 class CustomChooseView: UIView, UICollectionViewDataSource, UICollectionViewDelegate {
     
-    var type: ChooseViewType
+    enum FromType {
+        case setting
+        case training
+    }
+    
+    var chooseViewType: ChooseViewType
+    var fromType: FromType
+    public var hasSelectableChoice: Bool {
+        return self.dataSource.count > 0
+    }
     weak var delegate: CustomChooseViewDelegate?
     private lazy var dataSource: [Any] = {
-        return self.type.choices
+        switch self.fromType{
+            case .setting: return self.chooseViewType.settingChoices
+            case .training: return self.chooseViewType.trainingChoices
+        }
     }()
-//    private lazy var choices: [String] = {
-//        return self.type.choices
-//    }()
+
     private lazy var colltectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.itemSize = CGSize(width: self.itemWidth, height: self.itemWidth)
@@ -233,11 +313,18 @@ class CustomChooseView: UIView, UICollectionViewDataSource, UICollectionViewDele
         return (SCREEN_WIDTH - CHOOSE_ITEM_PADDING * 2) / 3
     }
     
+    // MARK: - Public
+    public func refreshView() {
+        dataSource = self.chooseViewType.settingChoices
+        colltectionView.reloadData()
+    }
+    
     
     // MARK: - Initialize
     
-    init(_ frame: CGRect, type: ChooseViewType) {
-        self.type = type
+    init(_ frame: CGRect, chooseViewType: ChooseViewType, fromType: FromType) {
+        self.chooseViewType = chooseViewType
+        self.fromType = fromType
         super.init(frame: frame)
         backgroundColor = Util.RGBColor(r: 0, g: 0, b: 0, a: 0.56)
         self.addSubview(self.colltectionView)
@@ -257,7 +344,7 @@ class CustomChooseView: UIView, UICollectionViewDataSource, UICollectionViewDele
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "chooseCell", for: indexPath) as! ChooseCollectionCell
         var cellLblStr: String
         let cellData = dataSource[indexPath.row]
-        switch type {
+        switch chooseViewType {
         case .motion:
             cellLblStr = (cellData as! PartMotion).motionName
         case .part:
@@ -274,10 +361,9 @@ class CustomChooseView: UIView, UICollectionViewDataSource, UICollectionViewDele
         let item = dataSource[indexPath.row]
         collectionView.deselectItem(at: indexPath, animated: true)
         guard (delegate != nil) else {return}
-        delegate?.choose(item: item)
+        
         self.removeFromSuperview()
-        dataSource.remove(at: indexPath.row)
-        colltectionView.reloadData()
+        delegate?.choose(item: item)
     }
     
 }

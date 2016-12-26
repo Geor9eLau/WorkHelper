@@ -15,8 +15,8 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
 //        let testMotionType = MotionType.back(motion: .motion1)
 //        let test = Motion(weight: 12, repeats: 12, timeConsuming: 12, motionType: LegMotion.motion1)
-        let testView = CustomChooseView.init(view.frame, type: .part)
-        view.addSubview(testView)
+    
+        
     }
 
     override func didReceiveMemoryWarning() {

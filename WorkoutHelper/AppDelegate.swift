@@ -19,9 +19,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.backgroundColor = UIColor.white
         
-        let bodyPartSettingVC = BodyPartSettingVC(nibName: "BodyPartSettingVC", bundle: nil)
-        let settingNav = UINavigationController(rootViewController: bodyPartSettingVC)
-        window?.rootViewController = settingNav
+        var rootVC: UIViewController
+        if UserDefaults.standard.bool(forKey: "isFirstTime") {
+            rootVC = MenuViewController()
+        }else{
+            rootVC = UINavigationController(rootViewController: BodyPartSettingVC())
+        }
+        
+
+        
+        window?.rootViewController = rootVC
         window?.makeKeyAndVisible()
         
         return true

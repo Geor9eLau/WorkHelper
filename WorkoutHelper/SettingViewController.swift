@@ -1,18 +1,18 @@
 //
-//  BaseViewController.swift
+//  SettingViewController.swift
 //  WorkoutHelper
 //
-//  Created by George on 2016/12/13.
+//  Created by George on 2016/12/26.
 //  Copyright © 2016年 George. All rights reserved.
 //
 
 import UIKit
 
-class BaseViewController: UIViewController {
+class SettingViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = UIColor.white
+
         // Do any additional setup after loading the view.
     }
 
@@ -22,11 +22,14 @@ class BaseViewController: UIViewController {
     }
     
 
+    /*
+    // MARK: - Navigation
 
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
-        
     }
+    */
 
 }

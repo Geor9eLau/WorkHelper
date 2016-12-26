@@ -10,37 +10,37 @@ import UIKit
 
 class MotionSettingVC: BodyPartSettingVC {
 
+    var part: BodyPart?
     
     private lazy var chosenMotions: [PartMotion] = {
-        switch self.type{
-        case let .motion(part):
-            switch part{
-            case .back:
-                return DataManager.userChosenBackMotions
-            case .leg:
-                return DataManager.userChosenLegMotions
-            case .shoulder:
-                return DataManager.userChosenShoulderMotions
-            }
-        default:
-            return [PartMotion]()
+        switch self.part!{
+        case .back:
+            return DataManager.userChosenBackMotions
+        case .leg:
+            return DataManager.userChosenLegMotions
+        case .shoulder:
+            return DataManager.userChosenShoulderMotions
         }
     }()
-    
     
     // MARK: - Life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        title = part?.rawValue
+        navigationItem.rightBarButtonItem = nil
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     // MARK: - Private
     
+    override func setupChooseView() {
+        chooseView = CustomChooseView(CGRect(x: 0, y: 0, width: SCREEN_WIDTH, height: SCREEN_HEIGHT), chooseViewType: .motion(partType: self.part!), fromType: .setting)
+        chooseView?.delegate = self
+    }
+    // MARK: - Event Handler
+    override func addBtnDidClicked() {
+        if chooseView!.hasSelectableChoice {view.addSubview(chooseView!)}
+    }
     
     // MARK: - UITableViewDataSource
     
@@ -67,15 +67,21 @@ class MotionSettingVC: BodyPartSettingVC {
         chosenMotions.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .fade)
         DataManager.updateChosenMotion(chosenMotions: chosenMotions, part: motion.part)
+        chooseView!.refreshView()
+        
+        tableView.reloadData()
     }
+    
+    
     // MARK: - CustomChooseViewDelegate
     
     override func choose(item: Any) {
         if let chosenMotion = item as? PartMotion{
             chosenMotions.append(chosenMotion)
-            customTableView.reloadData()
-            
             DataManager.updateChosenMotion(chosenMotions: chosenMotions, part: chosenMotion.part)
+            chooseView!.refreshView()
+            
+            customTableView.reloadData()
         }
     }
     /*
