@@ -12,6 +12,9 @@
 		5E25947B1E10F0CE00BBF24A /* GraphDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E25947A1E10F0CE00BBF24A /* GraphDataViewController.swift */; };
 		5E25947D1E10F0D900BBF24A /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E25947C1E10F0D900BBF24A /* SettingViewController.swift */; };
 		5E25947F1E10FC0400BBF24A /* MotionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E25947E1E10FC0400BBF24A /* MotionViewController.swift */; };
+		5E2594EB1E126CA100BBF24A /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E2594EA1E126CA000BBF24A /* SQLite.framework */; };
+		5E2594EC1E126CA100BBF24A /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5E2594EA1E126CA000BBF24A /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5E2594F01E126CFB00BBF24A /* SQLite.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5E2594EF1E126CFB00BBF24A /* SQLite.framework.dSYM */; };
 		5E9F53C71DFFA38400D1E9C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F53C61DFFA38400D1E9C0 /* AppDelegate.swift */; };
 		5E9F53C91DFFA38400D1E9C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F53C81DFFA38400D1E9C0 /* ViewController.swift */; };
 		5E9F53CC1DFFA38400D1E9C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E9F53CA1DFFA38400D1E9C0 /* Main.storyboard */; };
@@ -51,12 +54,38 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		5E2594ED1E126CA100BBF24A /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				5E2594EC1E126CA100BBF24A /* SQLite.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		5E2594EE1E126CC500BBF24A /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 16;
+			files = (
+				5E2594F01E126CFB00BBF24A /* SQLite.framework.dSYM in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		5E2594761E10F03A00BBF24A /* MenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		5E2594781E10F0AF00BBF24A /* HomePageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageViewController.swift; sourceTree = "<group>"; };
 		5E25947A1E10F0CE00BBF24A /* GraphDataViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphDataViewController.swift; sourceTree = "<group>"; };
 		5E25947C1E10F0D900BBF24A /* SettingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		5E25947E1E10FC0400BBF24A /* MotionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionViewController.swift; sourceTree = "<group>"; };
+		5E2594EA1E126CA000BBF24A /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
+		5E2594EF1E126CFB00BBF24A /* SQLite.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SQLite.framework.dSYM; path = Carthage/Build/iOS/SQLite.framework.dSYM; sourceTree = "<group>"; };
 		5E9F53C31DFFA38400D1E9C0 /* WorkoutHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkoutHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E9F53C61DFFA38400D1E9C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E9F53C81DFFA38400D1E9C0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -90,6 +119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5E2594EB1E126CA100BBF24A /* SQLite.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -113,6 +143,8 @@
 		5E9F53BA1DFFA38400D1E9C0 = {
 			isa = PBXGroup;
 			children = (
+				5E2594EF1E126CFB00BBF24A /* SQLite.framework.dSYM */,
+				5E2594EA1E126CA000BBF24A /* SQLite.framework */,
 				5E9F53C51DFFA38400D1E9C0 /* WorkoutHelper */,
 				5E9F53DA1DFFA38400D1E9C0 /* WorkoutHelperTests */,
 				5E9F53E51DFFA38400D1E9C0 /* WorkoutHelperUITests */,
@@ -245,6 +277,8 @@
 				5E9F53BF1DFFA38400D1E9C0 /* Sources */,
 				5E9F53C01DFFA38400D1E9C0 /* Frameworks */,
 				5E9F53C11DFFA38400D1E9C0 /* Resources */,
+				5E2594ED1E126CA100BBF24A /* Embed Frameworks */,
+				5E2594EE1E126CC500BBF24A /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -544,6 +578,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AR39NS83R8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = WorkoutHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = SZU.WorkoutHelper.George;
@@ -557,6 +595,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = AR39NS83R8;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = WorkoutHelper/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = SZU.WorkoutHelper.George;

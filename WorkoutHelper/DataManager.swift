@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SQLite
 
 public let ALL_BODY_PART_CHOICES: [BodyPart] = [.leg, .shoulder, .back]
 public let ALL_BACK_MOTION_CHOICES: [BackMotion] = [.motion1, .motion2, .motion3]
