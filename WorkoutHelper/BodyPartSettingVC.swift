@@ -26,7 +26,7 @@ class BodyPartSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         return tmpBtn
     }()
     
-    private var chosenParts: [BodyPart] = DataManager.userChosenParts
+    private var chosenParts: [BodyPart] = DataManager.sharedInstance.userChosenParts
     
     var chooseView: CustomChooseView?
     
@@ -87,7 +87,7 @@ class BodyPartSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         chosenParts.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .fade)
-        DataManager.updateChosenParts(chosenParts: chosenParts)
+        DataManager.sharedInstance.updateChosenParts(chosenParts: chosenParts)
         chooseView!.refreshView()
         tableView.reloadData()
     }
@@ -132,7 +132,7 @@ class BodyPartSettingVC: BaseViewController, UITableViewDelegate, UITableViewDat
         
         if let chosenPart = item as? BodyPart{
             chosenParts.append(chosenPart)
-            DataManager.updateChosenParts(chosenParts: chosenParts)
+            DataManager.sharedInstance.updateChosenParts(chosenParts: chosenParts)
             chooseView!.refreshView()
             customTableView.reloadData()
         }

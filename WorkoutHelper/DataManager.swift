@@ -21,7 +21,33 @@ fileprivate let KEY_USER_CHOSEN_LEG_MOTIONS = "KEY_USER_CHOSEN_LEG_MOTIONS"
 fileprivate let KEY_USER_CHOSEN_SHOULDER_MOTIONS = "KEY_USER_CHOSEN_SHOULDER_MOTIONS"
 
 public class DataManager: NSObject {
-    static var userChosenParts: [BodyPart] {
+    
+    static let sharedInstance = DataManager()
+    private var dataBase: Connection?
+        
+    // MARK: - Motion
+    private let motionTable = Table("Motion")
+    private let name = Expression<String>("name")
+    private let motionTypeName = Expression<String>("motionTypeName")
+    private let motionTypePart = Expression<String>("motionTypePart")
+    private let date = Expression<String>("date")
+    private let weight = Expression<Double>("weight")
+    private let repeats = Expression<Int64>("repeats")
+    private let timingConsuming = Expression<Int64>("timingConsuming")
+    
+    // MARK: - Training
+
+    private let trainingTable = Table("Training")
+    private let numberOfGroup = Expression<Int64>("numberOfGroup")
+    private let totalTimeConsuming = Expression<Int64>("totalTimeConsuming")
+    private let totalExerciseConsuming = Expression<Double>("totalExerciseConsuming")
+    private let maxWeight = Expression<Double>("maxWeight")
+    private let averageWeight = Expression<Double>("averageWeight")
+    private let totalWeight = Expression<Double>("totalWeight")
+    
+    
+    // MARK: -
+    public var userChosenParts: [BodyPart] {
         if let chosenPartsData = UserDefaults.standard.data(forKey: KEY_USER_CHOSEN_PARTS){
             let storer = NSKeyedUnarchiver.unarchiveObject(with: chosenPartsData) as! chosenPartsStorer
             return storer.chosenParts
@@ -29,7 +55,7 @@ public class DataManager: NSObject {
         return [BodyPart]()
     }
     
-    static var userChosenLegMotions: [LegMotion] {
+    public var userChosenLegMotions: [LegMotion] {
         if let chosenMotionData = UserDefaults.standard.data(forKey: KEY_USER_CHOSEN_LEG_MOTIONS){
             let storer = NSKeyedUnarchiver.unarchiveObject(with: chosenMotionData) as! chosenLegMotionsStorer
             return storer.chosenLegMotions
@@ -37,7 +63,7 @@ public class DataManager: NSObject {
         return [LegMotion]()
     }
     
-    static var userChosenBackMotions: [BackMotion] {
+    public var userChosenBackMotions: [BackMotion] {
         if let chosenMotionData = UserDefaults.standard.data(forKey: KEY_USER_CHOSEN_BACK_MOTIONS){
             let storer = NSKeyedUnarchiver.unarchiveObject(with: chosenMotionData) as! chosenBackMotionsStorer
             return storer.chosenBackMotions
@@ -45,7 +71,7 @@ public class DataManager: NSObject {
         return [BackMotion]()
     }
     
-    static var userChosenShoulderMotions: [ShoulderMotion] {
+    public var userChosenShoulderMotions: [ShoulderMotion] {
         if let chosenMotionData = UserDefaults.standard.data(forKey: KEY_USER_CHOSEN_SHOULDER_MOTIONS){
             let storer = NSKeyedUnarchiver.unarchiveObject(with: chosenMotionData) as! chosenShoulderMotionsStorer
             return storer.chosenShoulderMotions
@@ -53,14 +79,14 @@ public class DataManager: NSObject {
         return [ShoulderMotion]()
     }
     
-    static func updateChosenParts(chosenParts: [BodyPart]){
+    public func updateChosenParts(chosenParts: [BodyPart]){
         let tmpStorer = chosenPartsStorer(chosenParts: chosenParts)
         let storedData = NSKeyedArchiver.archivedData(withRootObject: tmpStorer)
         UserDefaults.standard.set(storedData, forKey: KEY_USER_CHOSEN_PARTS)
         UserDefaults.standard.synchronize()
     }
     
-    static func updateChosenMotion(chosenMotions: [PartMotion], part: BodyPart){
+    public func updateChosenMotion(chosenMotions: [PartMotion], part: BodyPart){
         
         switch part{
         case .back:
@@ -79,9 +105,67 @@ public class DataManager: NSObject {
         UserDefaults.standard.synchronize()
     }
     
-    var isFirstTime: Bool {
+    
+    // MARK: -
+    
+    func addTrainingRecord(training: Training) {
+        do{
+            try dataBase?.run(trainingTable.insert(numberOfGroup <- Int64(training.numberOfGroup)))
+        }
+        catch let error{
+            print(error.localizedDescription)
+        }
+    }
+    
+    func addMotionRecord(motion: Motion){
+        
+    }
+    
+    // MARK: - computed property
+    private var isFirstTime: Bool {
         return UserDefaults.standard.bool(forKey: "isFirstTime")
     }
+    
+    
+    // MARK: - used to build singleton
+    private override init() {
+        super.init()
+        do{
+            dataBase = try Connection("\(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!)/db.sqlite3")
+        }
+        catch let error{
+            print(error.localizedDescription)
+        }
+        
+        
+        do {
+            try dataBase?.run(motionTable.create { t in
+                t.column(name)
+                t.column(motionTypeName)
+                t.column(motionTypePart)
+                t.column(date)
+                t.column(weight)
+                t.column(repeats)
+                t.column(timingConsuming)
+            })
+            
+            try dataBase?.run(trainingTable.create { t in
+                t.column(numberOfGroup)
+                t.column(motionTypeName)
+                t.column(motionTypePart)
+                t.column(date)
+                t.column(totalTimeConsuming)
+                t.column(maxWeight)
+                t.column(totalWeight)
+                t.column(averageWeight)
+                t.column(totalExerciseConsuming)
+            })
+        }
+        catch let error{
+            print(error.localizedDescription)
+        }
+    }
+    
 }
 
 // TODO: - Storer Helper Class -

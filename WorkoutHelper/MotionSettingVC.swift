@@ -15,11 +15,11 @@ class MotionSettingVC: BodyPartSettingVC {
     private lazy var chosenMotions: [PartMotion] = {
         switch self.part!{
         case .back:
-            return DataManager.userChosenBackMotions
+            return DataManager.sharedInstance.userChosenBackMotions
         case .leg:
-            return DataManager.userChosenLegMotions
+            return DataManager.sharedInstance.userChosenLegMotions
         case .shoulder:
-            return DataManager.userChosenShoulderMotions
+            return DataManager.sharedInstance.userChosenShoulderMotions
         }
     }()
     
@@ -66,7 +66,7 @@ class MotionSettingVC: BodyPartSettingVC {
         let motion = chosenMotions[indexPath.row]
         chosenMotions.remove(at: indexPath.row)
         tableView.deleteRows(at: [indexPath], with: .fade)
-        DataManager.updateChosenMotion(chosenMotions: chosenMotions, part: motion.part)
+        DataManager.sharedInstance.updateChosenMotion(chosenMotions: chosenMotions, part: motion.part)
         chooseView!.refreshView()
         
         tableView.reloadData()
@@ -78,7 +78,7 @@ class MotionSettingVC: BodyPartSettingVC {
     override func choose(item: Any) {
         if let chosenMotion = item as? PartMotion{
             chosenMotions.append(chosenMotion)
-            DataManager.updateChosenMotion(chosenMotions: chosenMotions, part: chosenMotion.part)
+            DataManager.sharedInstance.updateChosenMotion(chosenMotions: chosenMotions, part: chosenMotion.part)
             chooseView!.refreshView()
             
             customTableView.reloadData()

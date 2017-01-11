@@ -76,7 +76,7 @@ public protocol PartMotion{
     var motionName: String { get }
 }
 
-class Motion: NSObject {
+class Motion: NSObject, NSCoding {
     var name: String = ""
     var motionType: PartMotion
     var date: Date = Date()
@@ -95,6 +95,25 @@ class Motion: NSObject {
         self.motionType = motionType
     }
     
+    required init?(coder aDecoder: NSCoder) {
+        name = aDecoder.decodeObject(forKey: "name") as! String
+        motionType = aDecoder.decodeObject(forKey: "motionType") as! PartMotion
+        date = aDecoder.decodeObject(forKey: "date") as! Date
+        weight = aDecoder.decodeObject(forKey: "weight") as! Float
+        repeats = aDecoder.decodeObject(forKey: "repeats") as! UInt
+        timeConsuming = aDecoder.decodeObject(forKey: "timeConsuming") as! UInt
+    }
+    
+    func encode(with aCoder: NSCoder) {
+        aCoder.encode(name, forKey: "name")
+        aCoder.encode(motionType, forKey: "motionType")
+        aCoder.encode(date, forKey: "date")
+        aCoder.encode(weight, forKey: "weight")
+        aCoder.encode(repeats, forKey: "repeats")
+        aCoder.encode(timeConsuming, forKey: "timingConsuming")
+    }
+    
+    
 //    static func ==(lhs: Motion, rhs: Motion) -> Bool{
 //        return lhs.motionType == rhs.motionType
 //    }
@@ -105,13 +124,13 @@ class Motion: NSObject {
 class Training: NSObject {
     var motions = [Motion]()
     var motionType: PartMotion
-    private var numberOfGroup: UInt = 0
-    private var totalTimeConsuming: UInt = 0
-    private var totalExerciseConsuming: Float = 0
-    private var maxWeight: Float = 0
-    private var averageWight: Float = 0
-    private var date: Date = Date()
-    private var totoalWeight: Float = 0
+    var numberOfGroup: UInt = 0
+    var totalTimeConsuming: UInt = 0
+    var totalExerciseConsuming: Float = 0
+    var maxWeight: Float = 0
+    var averageWight: Float = 0
+    var date: Date = Date()
+    var totoalWeight: Float = 0
     
     init(motionType: PartMotion) {
         self.motionType = motionType

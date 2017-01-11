@@ -23,7 +23,7 @@ class HomePageViewController: BaseViewController, UICollectionViewDelegate, UICo
         return tmpCollectionView
     }()
     
-    private var dataSource: [BodyPart] = DataManager.userChosenParts
+    private var dataSource: [BodyPart] = DataManager.sharedInstance.userChosenParts
     
     override func viewDidLoad() {
         super.viewDidLoad()

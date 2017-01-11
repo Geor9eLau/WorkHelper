@@ -13,15 +13,15 @@ enum ChooseViewType: ChooseViewTypeProtocol {
     var settingChoices: [Any] {
         switch self{
         case .part:
-            return ALL_BODY_PART_CHOICES.getSelectableParts(chosenParts: DataManager.userChosenParts)
+            return ALL_BODY_PART_CHOICES.getSelectableParts(chosenParts: DataManager.sharedInstance.userChosenParts)
         case let .motion(partType):
             switch partType {
             case .leg:
-                return ALL_LEG_MOTION_CHOICES.getSelectableMotions(chosenMotions: DataManager.userChosenLegMotions)
+                return ALL_LEG_MOTION_CHOICES.getSelectableMotions(chosenMotions: DataManager.sharedInstance.userChosenLegMotions)
             case .back:
-                return ALL_BACK_MOTION_CHOICES.getSelectableMotions(chosenMotions: DataManager.userChosenBackMotions)
+                return ALL_BACK_MOTION_CHOICES.getSelectableMotions(chosenMotions: DataManager.sharedInstance.userChosenBackMotions)
             case .shoulder:
-                return ALL_SHOULDER_MOTION_CHOICES.getSelectableMotions(chosenMotions: DataManager.userChosenShoulderMotions)
+                return ALL_SHOULDER_MOTION_CHOICES.getSelectableMotions(chosenMotions: DataManager.sharedInstance.userChosenShoulderMotions)
             }
         case let .repeats(motionType):
             switch motionType.part {
@@ -82,15 +82,15 @@ enum ChooseViewType: ChooseViewTypeProtocol {
     var trainingChoices: [Any] {
         switch self {
         case .part:
-            return DataManager.userChosenParts
+            return DataManager.sharedInstance.userChosenParts
         case let .motion(partType):
             switch partType {
             case .leg:
-                return DataManager.userChosenLegMotions
+                return DataManager.sharedInstance.userChosenLegMotions
             case .back:
-                return DataManager.userChosenBackMotions
+                return DataManager.sharedInstance.userChosenBackMotions
             case .shoulder:
-                return DataManager.userChosenShoulderMotions
+                return DataManager.sharedInstance.userChosenShoulderMotions
             }
         case let .repeats(motionType):
             switch motionType.part {
