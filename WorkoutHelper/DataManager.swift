@@ -27,6 +27,7 @@ public class DataManager: NSObject {
         
     // MARK: - Motion
     private let motionTable = Table("Motion")
+    private let motionId = Expression<String>("motionId")
     private let name = Expression<String>("name")
     private let motionTypeName = Expression<String>("motionTypeName")
     private let motionTypePart = Expression<String>("motionTypePart")
@@ -36,8 +37,8 @@ public class DataManager: NSObject {
     private let timingConsuming = Expression<Int64>("timingConsuming")
     
     // MARK: - Training
-
     private let trainingTable = Table("Training")
+    private let motions = Expression<Blob>("motions")
     private let numberOfGroup = Expression<Int64>("numberOfGroup")
     private let totalTimeConsuming = Expression<Int64>("totalTimeConsuming")
     private let totalExerciseConsuming = Expression<Double>("totalExerciseConsuming")
@@ -107,18 +108,48 @@ public class DataManager: NSObject {
     
     
     // MARK: -
-    
     func addTrainingRecord(training: Training) {
         do{
-            try dataBase?.run(trainingTable.insert(numberOfGroup <- Int64(training.numberOfGroup)))
+            let dateMatter = DateFormatter()
+            dateMatter.dateFormat = "yyyy-MM-dd"
+            let dateStr = dateMatter.string(from: training.date)
+            
+            let motionsData = NSKeyedArchiver.archivedData(withRootObject: training.motions)
+            try dataBase?.run(trainingTable.insert(numberOfGroup <- Int64(training.numberOfGroup),
+                                                   totalTimeConsuming <- Int64(training.totalTimeConsuming),
+                                                   totalExerciseConsuming <- Double(training.totalExerciseConsuming),
+                                                   averageWeight <- Double(training.averageWeight),
+                                                   maxWeight <- Double(training.maxWeight), totalWeight <- Double(training.totoalWeight),
+                                                   date <- dateStr,
+                                                   motionTypeName <- training.motionType.motionName,
+                                                   motionTypePart <- training.motionType.part.rawValue,
+                                                   motions <- motionsData.datatypeValue,
+                                                   totalWeight <- Double(training.totoalWeight)
+                                                   ))
         }
         catch let error{
             print(error.localizedDescription)
         }
     }
     
+    
     func addMotionRecord(motion: Motion){
-        
+        do{
+            let dateMatter = DateFormatter()
+            dateMatter.dateFormat = "yyyy-MM-dd"
+            let dateStr = dateMatter.string(from: motion.date)
+            try dataBase?.run(motionTable.insert(motionId <- motion.motionId,
+                                                 repeats <- Int64(motion.repeats),
+                                                   timingConsuming <- Int64(motion.timeConsuming),
+                                                   date <- dateStr,
+                                                   motionTypeName <- motion.motionType.motionName,
+                                                   motionTypePart <- motion.motionType.part.rawValue,
+                                                   weight <- Double(motion.weight)
+            ))
+        }
+        catch let error{
+            print(error.localizedDescription)
+        }
     }
     
     // MARK: - computed property

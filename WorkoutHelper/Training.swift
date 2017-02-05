@@ -77,7 +77,8 @@ public protocol PartMotion{
 }
 
 class Motion: NSObject, NSCoding {
-    var name: String = ""
+    var motionId: String = ""
+//    var name: String = ""
     var motionType: PartMotion
     var date: Date = Date()
     var weight: Float
@@ -96,7 +97,7 @@ class Motion: NSObject, NSCoding {
     }
     
     required init?(coder aDecoder: NSCoder) {
-        name = aDecoder.decodeObject(forKey: "name") as! String
+//        name = aDecoder.decodeObject(forKey: "name") as! String
         motionType = aDecoder.decodeObject(forKey: "motionType") as! PartMotion
         date = aDecoder.decodeObject(forKey: "date") as! Date
         weight = aDecoder.decodeObject(forKey: "weight") as! Float
@@ -105,7 +106,7 @@ class Motion: NSObject, NSCoding {
     }
     
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(name, forKey: "name")
+//        aCoder.encode(name, forKey: "name")
         aCoder.encode(motionType, forKey: "motionType")
         aCoder.encode(date, forKey: "date")
         aCoder.encode(weight, forKey: "weight")
@@ -128,7 +129,7 @@ class Training: NSObject {
     var totalTimeConsuming: UInt = 0
     var totalExerciseConsuming: Float = 0
     var maxWeight: Float = 0
-    var averageWight: Float = 0
+    var averageWeight: Float = 0
     var date: Date = Date()
     var totoalWeight: Float = 0
     
@@ -142,7 +143,7 @@ class Training: NSObject {
         self.totalTimeConsuming += motion.timeConsuming
         self.totalExerciseConsuming += motion.exerciseConsuming
         self.totoalWeight += motion.weight
-        self.averageWight = self.totoalWeight / Float(self.motions.count)
+        self.averageWeight = self.totoalWeight / Float(self.motions.count)
         
         if self.maxWeight == 0 {
             self.maxWeight = motion.weight

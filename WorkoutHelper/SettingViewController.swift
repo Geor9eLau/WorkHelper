@@ -12,7 +12,7 @@ class SettingViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = "Setting"
         // Do any additional setup after loading the view.
     }
 

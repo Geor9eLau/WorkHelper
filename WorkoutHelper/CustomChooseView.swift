@@ -76,6 +76,8 @@ enum ChooseViewType: ChooseViewTypeProtocol {
                     return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
                 }
             }
+        default:
+            return [""]
         }
     }
     
@@ -97,25 +99,27 @@ enum ChooseViewType: ChooseViewTypeProtocol {
             case .leg:
                 switch motionType.motionName {
                 case "motion1":
-                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                    return [2, 4, 6, 8, 10, 12, 14, 16, 18]
                 default:
-                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                    return [2, 4, 6, 8, 10, 12, 14, 16, 18]
                 }
                 
             case .back:
                 switch motionType.motionName {
                 case "motion1":
-                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                    return [2, 4, 6, 8, 10, 12, 14, 16, 18]
                 default:
-                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                    let tmp = [2, 4, 6, 8, 10, 12, 14, 16, 18]
+                    return tmp
+                    
                 }
                 
             case .shoulder:
                 switch motionType.motionName {
                 case "motion1":
-                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                    return [2, 4, 6, 8, 10, 12, 14, 16, 18]
                 default:
-                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                    return [2, 4, 6, 8, 10, 12, 14, 16, 18]
                 }
             }
             
@@ -124,27 +128,29 @@ enum ChooseViewType: ChooseViewTypeProtocol {
             case .leg:
                 switch motionType.motionName {
                 case "motion1":
-                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                    return [2.0, 4.0, 6.0, 8.0, 10.0, 12.0, 14.0, 16.0, 18.0]
                 default:
-                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                    return [2.0, 4.0, 6.0, 8.0, 10.0, 12.0, 14.0, 16.0, 18.0]
                 }
                 
             case .back:
                 switch motionType.motionName {
                 case "motion1":
-                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                    return [2.0, 4.0, 6.0, 8.0, 10.0, 12.0, 14.0, 16.0, 18.0]
                 default:
-                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                    return [2.0, 4.0, 6.0, 8.0, 10.0, 12.0, 14.0, 16.0, 18.0]
                 }
                 
             case .shoulder:
                 switch motionType.motionName {
                 case "motion1":
-                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                    return [2.0, 4.0, 6.0, 8.0, 10.0, 12.0, 14.0, 16.0, 18.0]
                 default:
-                    return ["2", "4", "6", "8", "10", "12", "14", "16", "18" ]
+                    return [2.0, 4.0, 6.0, 8.0, 10.0, 12.0, 14.0, 16.0, 18.0]
                 }
             }
+        default:
+            return [""]
         }
     }
 
@@ -260,6 +266,7 @@ enum ChooseViewType: ChooseViewTypeProtocol {
     case motion(partType: BodyPart)
     case repeats(motionType: PartMotion)
     case weight(motionType: PartMotion)
+    case none
 }
 
 
@@ -288,12 +295,7 @@ class CustomChooseView: UIView, UICollectionViewDataSource, UICollectionViewDele
         return self.dataSource.count > 0
     }
     weak var delegate: CustomChooseViewDelegate?
-    private lazy var dataSource: [Any] = {
-        switch self.fromType{
-            case .setting: return self.chooseViewType.settingChoices
-            case .training: return self.chooseViewType.trainingChoices
-        }
-    }()
+    private var dataSource: [Any] = [""]
 
     private lazy var colltectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -315,7 +317,12 @@ class CustomChooseView: UIView, UICollectionViewDataSource, UICollectionViewDele
     
     // MARK: - Public
     public func refreshView() {
-        dataSource = self.chooseViewType.settingChoices
+        dataSource = {
+            switch self.fromType{
+            case .setting: return self.chooseViewType.settingChoices
+            case .training: return self.chooseViewType.trainingChoices
+            }
+        }()
         colltectionView.reloadData()
     }
     
@@ -328,7 +335,7 @@ class CustomChooseView: UIView, UICollectionViewDataSource, UICollectionViewDele
         super.init(frame: frame)
         backgroundColor = Util.RGBColor(r: 0, g: 0, b: 0, a: 0.56)
         self.addSubview(self.colltectionView)
-        self.colltectionView.reloadData()
+        self.refreshView()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -350,7 +357,7 @@ class CustomChooseView: UIView, UICollectionViewDataSource, UICollectionViewDele
         case .part:
             cellLblStr = (cellData as! BodyPart).rawValue
         default:
-            cellLblStr = cellData as! String
+            cellLblStr = (cellData as! NSNumber).stringValue
         }
         cell.chooseLbl.text = cellLblStr
         return cell

@@ -12,7 +12,7 @@ class GraphDataViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        title = "Data"
         // Do any additional setup after loading the view.
     }
 

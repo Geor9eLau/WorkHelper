@@ -63,7 +63,7 @@ extension NSCoder {
         for part in parts {
             tmpData.append(part.rawValue)
         }
-        self.encode(tmpData)
+        self.encode(tmpData, forKey: forKey)
     }
     
     func decodeBodyPart(forKey:String) -> [BodyPart] {
@@ -81,7 +81,7 @@ extension NSCoder {
         for motion in motions {
             tmpData.append(motion.rawValue)
         }
-        self.encode(tmpData)
+        self.encode(tmpData, forKey: forKey)
     }
     
     func decodeLegMotions(forKey:String) -> [LegMotion] {
@@ -99,7 +99,7 @@ extension NSCoder {
         for motion in motions {
             tmpData.append(motion.rawValue)
         }
-        self.encode(tmpData)
+        self.encode(tmpData, forKey: forKey)
     }
     
     func decodeBackMotions(forKey:String) -> [BackMotion] {
@@ -117,7 +117,7 @@ extension NSCoder {
         for motion in motions {
             tmpData.append(motion.rawValue)
         }
-        self.encode(tmpData)
+        self.encode(tmpData, forKey: forKey)
     }
     
     func decodeShoulderMotions(forKey:String) -> [ShoulderMotion] {
@@ -128,6 +128,31 @@ extension NSCoder {
             }
         }
         return tmpData
+    }
+    
+    func encodePartMotion(partMotion: PartMotion, forkey:String){
+        let tmpStrArr = [partMotion.part.rawValue, partMotion.motionName]
+        self.encode(tmpStrArr, forKey: forkey)
+    }
+    
+    func decodePartMotion(forKey:String) -> PartMotion? {
+        if let tmpStrArr = self.decodeObject(forKey: forKey) as? [String]{
+            let partName = tmpStrArr.first
+            let motionName = tmpStrArr.last
+            let part = BodyPart(rawValue: partName!)
+            switch part! {
+            case .back:
+                let backMotion = BackMotion(rawValue: motionName!)
+                return backMotion
+            case .leg:
+                let legMotion = LegMotion(rawValue: motionName!)
+                return legMotion
+            case .shoulder:
+                let shoulderMotion = ShoulderMotion(rawValue: motionName!)
+                return shoulderMotion
+            }
+        }
+        return nil
     }
 }
 

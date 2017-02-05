@@ -15,6 +15,7 @@
 		5E2594EB1E126CA100BBF24A /* SQLite.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E2594EA1E126CA000BBF24A /* SQLite.framework */; };
 		5E2594EC1E126CA100BBF24A /* SQLite.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5E2594EA1E126CA000BBF24A /* SQLite.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5E2594F01E126CFB00BBF24A /* SQLite.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5E2594EF1E126CFB00BBF24A /* SQLite.framework.dSYM */; };
+		5E55DA3C1E46D58A000F2F2B /* Timer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E55DA3B1E46D58A000F2F2B /* Timer.swift */; };
 		5E9F53C71DFFA38400D1E9C0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F53C61DFFA38400D1E9C0 /* AppDelegate.swift */; };
 		5E9F53C91DFFA38400D1E9C0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F53C81DFFA38400D1E9C0 /* ViewController.swift */; };
 		5E9F53CC1DFFA38400D1E9C0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5E9F53CA1DFFA38400D1E9C0 /* Main.storyboard */; };
@@ -86,6 +87,7 @@
 		5E25947E1E10FC0400BBF24A /* MotionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MotionViewController.swift; sourceTree = "<group>"; };
 		5E2594EA1E126CA000BBF24A /* SQLite.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SQLite.framework; path = Carthage/Build/iOS/SQLite.framework; sourceTree = "<group>"; };
 		5E2594EF1E126CFB00BBF24A /* SQLite.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SQLite.framework.dSYM; path = Carthage/Build/iOS/SQLite.framework.dSYM; sourceTree = "<group>"; };
+		5E55DA3B1E46D58A000F2F2B /* Timer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Timer.swift; sourceTree = "<group>"; };
 		5E9F53C31DFFA38400D1E9C0 /* WorkoutHelper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WorkoutHelper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5E9F53C61DFFA38400D1E9C0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E9F53C81DFFA38400D1E9C0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -140,6 +142,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E55DA391E46D54B000F2F2B /* ChooseView */ = {
+			isa = PBXGroup;
+			children = (
+				5E9F54041DFFE1F100D1E9C0 /* CustomChooseView.swift */,
+				5E9F540C1E00DDFF00D1E9C0 /* ChooseCollectionCell.swift */,
+				5E9F540D1E00DDFF00D1E9C0 /* ChooseCollectionCell.xib */,
+			);
+			name = ChooseView;
+			sourceTree = "<group>";
+		};
+		5E55DA3A1E46D555000F2F2B /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+				5E55DA3B1E46D58A000F2F2B /* Timer.swift */,
+			);
+			name = Timer;
+			sourceTree = "<group>";
+		};
 		5E9F53BA1DFFA38400D1E9C0 = {
 			isa = PBXGroup;
 			children = (
@@ -225,9 +245,8 @@
 		5E9F540B1E00DDD900D1E9C0 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				5E9F54041DFFE1F100D1E9C0 /* CustomChooseView.swift */,
-				5E9F540C1E00DDFF00D1E9C0 /* ChooseCollectionCell.swift */,
-				5E9F540D1E00DDFF00D1E9C0 /* ChooseCollectionCell.xib */,
+				5E55DA3A1E46D555000F2F2B /* Timer */,
+				5E55DA391E46D54B000F2F2B /* ChooseView */,
 			);
 			name = CustomView;
 			sourceTree = "<group>";
@@ -416,6 +435,7 @@
 				5E25947D1E10F0D900BBF24A /* SettingViewController.swift in Sources */,
 				5E9F541D1E022E1500D1E9C0 /* Extension.swift in Sources */,
 				5E9F53C91DFFA38400D1E9C0 /* ViewController.swift in Sources */,
+				5E55DA3C1E46D58A000F2F2B /* Timer.swift in Sources */,
 				5E25947F1E10FC0400BBF24A /* MotionViewController.swift in Sources */,
 				5E9F53F81DFFD41E00D1E9C0 /* BaseViewController.swift in Sources */,
 				5E9F53FF1DFFDBDD00D1E9C0 /* SettingCell.swift in Sources */,
