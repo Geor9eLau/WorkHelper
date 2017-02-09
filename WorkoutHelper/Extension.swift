@@ -68,7 +68,7 @@ extension NSCoder {
     
     func decodeBodyPart(forKey:String) -> [BodyPart] {
         var tmpData = [BodyPart]()
-        if let partsStr = self.decodeObject() as? [String] {
+        if let partsStr = self.decodeObject(forKey: forKey) as? [String] {
             for partStr in partsStr {
                 tmpData.append(BodyPart(rawValue: partStr)!)
             }
@@ -86,7 +86,7 @@ extension NSCoder {
     
     func decodeLegMotions(forKey:String) -> [LegMotion] {
         var tmpData = [LegMotion]()
-        if let motionsStr = self.decodeObject() as? [String] {
+        if let motionsStr = self.decodeObject(forKey: forKey) as? [String] {
             for motionStr in motionsStr {
                 tmpData.append(LegMotion(rawValue: motionStr)!)
             }
@@ -104,7 +104,7 @@ extension NSCoder {
     
     func decodeBackMotions(forKey:String) -> [BackMotion] {
         var tmpData = [BackMotion]()
-        if let motionsStr = self.decodeObject() as? [String] {
+        if let motionsStr = self.decodeObject(forKey: forKey) as? [String] {
             for motionStr in motionsStr {
                 tmpData.append(BackMotion(rawValue: motionStr)!)
             }
@@ -122,7 +122,7 @@ extension NSCoder {
     
     func decodeShoulderMotions(forKey:String) -> [ShoulderMotion] {
         var tmpData = [ShoulderMotion]()
-        if let motionsStr = self.decodeObject() as? [String] {
+        if let motionsStr = self.decodeObject(forKey: forKey) as? [String] {
             for motionStr in motionsStr {
                 tmpData.append(ShoulderMotion(rawValue: motionStr)!)
             }

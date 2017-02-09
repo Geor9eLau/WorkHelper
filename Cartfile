@@ -1,1 +1,2 @@
 github "stephencelis/SQLite.swift" ~> 0.11.2
+github "devxoul/Toaster" ~> 2.0

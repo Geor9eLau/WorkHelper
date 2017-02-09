@@ -125,13 +125,43 @@ class Motion: NSObject, NSCoding {
 class Training: NSObject {
     var motions = [Motion]()
     var motionType: PartMotion
-    var numberOfGroup: UInt = 0
-    var totalTimeConsuming: UInt = 0
-    var totalExerciseConsuming: Float = 0
-    var maxWeight: Float = 0
-    var averageWeight: Float = 0
+    var numberOfGroup: UInt{
+        return UInt(self.motions.count)
+    }
+    var totalTimeConsuming: UInt{
+        var tmpTC: UInt = 0
+        for motion in self.motions{
+            tmpTC = tmpTC + motion.timeConsuming
+        }
+        return tmpTC
+    }
+    var totalExerciseConsuming: Float{
+        var tmpEC: Float = 0
+        for motion in self.motions{
+            tmpEC = tmpEC + motion.weight * motion.weight
+        }
+        return tmpEC
+    }
+    var maxWeight: Float{
+        var tmpMax: Float = 0
+        for motion in self.motions{
+            if motion.weight > tmpMax{
+                tmpMax = motion.weight
+            }
+        }
+        return tmpMax
+    }
+    var averageWeight: Float{
+        var tmpWeight:Float = 0
+        for motion in self.motions{
+            tmpWeight = tmpWeight + motion.weight
+        }
+        return tmpWeight
+    }
     var date: Date = Date()
-    var totoalWeight: Float = 0
+    var totoalWeight: Float{
+        return self.averageWeight * Float(self.motions.count)
+    }
     
     init(motionType: PartMotion) {
         self.motionType = motionType
@@ -139,18 +169,6 @@ class Training: NSObject {
     
     func addMotion(motion: Motion) {
         self.motions.append(motion)
-        self.numberOfGroup += 1
-        self.totalTimeConsuming += motion.timeConsuming
-        self.totalExerciseConsuming += motion.exerciseConsuming
-        self.totoalWeight += motion.weight
-        self.averageWeight = self.totoalWeight / Float(self.motions.count)
-        
-        if self.maxWeight == 0 {
-            self.maxWeight = motion.weight
-        }
-        if self.maxWeight < motion.weight {
-            self.maxWeight = motion.weight
-        }
     }
 }
 

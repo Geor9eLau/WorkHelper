@@ -28,7 +28,7 @@ public class DataManager: NSObject {
     // MARK: - Motion
     private let motionTable = Table("Motion")
     private let motionId = Expression<String>("motionId")
-    private let name = Expression<String>("name")
+//    private let name = Expression<String>("name")
     private let motionTypeName = Expression<String>("motionTypeName")
     private let motionTypePart = Expression<String>("motionTypePart")
     private let date = Expression<String>("date")
@@ -128,27 +128,24 @@ public class DataManager: NSObject {
                                                    ))
         }
         catch let error{
-            print(error.localizedDescription)
+            print("\(error)")
         }
     }
     
     
     func addMotionRecord(motion: Motion){
         do{
-            let dateMatter = DateFormatter()
-            dateMatter.dateFormat = "yyyy-MM-dd"
-            let dateStr = dateMatter.string(from: motion.date)
             try dataBase?.run(motionTable.insert(motionId <- motion.motionId,
                                                  repeats <- Int64(motion.repeats),
                                                    timingConsuming <- Int64(motion.timeConsuming),
-                                                   date <- dateStr,
+                                                   date <- Util.transformDateToDateStr(date: motion.date),
                                                    motionTypeName <- motion.motionType.motionName,
                                                    motionTypePart <- motion.motionType.part.rawValue,
                                                    weight <- Double(motion.weight)
             ))
         }
         catch let error{
-            print(error.localizedDescription)
+            print("\(error)")
         }
     }
     
@@ -165,13 +162,14 @@ public class DataManager: NSObject {
             dataBase = try Connection("\(NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).last!)/db.sqlite3")
         }
         catch let error{
-            print(error.localizedDescription)
+            print("\(error)")
         }
         
         
         do {
             try dataBase?.run(motionTable.create { t in
-                t.column(name)
+                t.column(motionId)
+//                t.column(name)
                 t.column(motionTypeName)
                 t.column(motionTypePart)
                 t.column(date)
@@ -193,7 +191,7 @@ public class DataManager: NSObject {
             })
         }
         catch let error{
-            print(error.localizedDescription)
+            print("\(error)")
         }
     }
     
