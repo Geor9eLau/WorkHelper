@@ -47,64 +47,6 @@ public class DataManager: NSObject {
     private let totalWeight = Expression<Double>("totalWeight")
     
     
-    // MARK: -
-    public var userChosenParts: [BodyPart] {
-        if let chosenPartsData = UserDefaults.standard.data(forKey: KEY_USER_CHOSEN_PARTS){
-            let storer = NSKeyedUnarchiver.unarchiveObject(with: chosenPartsData) as! chosenPartsStorer
-            return storer.chosenParts
-        }
-        return [BodyPart]()
-    }
-    
-    public var userChosenLegMotions: [LegMotion] {
-        if let chosenMotionData = UserDefaults.standard.data(forKey: KEY_USER_CHOSEN_LEG_MOTIONS){
-            let storer = NSKeyedUnarchiver.unarchiveObject(with: chosenMotionData) as! chosenLegMotionsStorer
-            return storer.chosenLegMotions
-        }
-        return [LegMotion]()
-    }
-    
-    public var userChosenBackMotions: [BackMotion] {
-        if let chosenMotionData = UserDefaults.standard.data(forKey: KEY_USER_CHOSEN_BACK_MOTIONS){
-            let storer = NSKeyedUnarchiver.unarchiveObject(with: chosenMotionData) as! chosenBackMotionsStorer
-            return storer.chosenBackMotions
-        }
-        return [BackMotion]()
-    }
-    
-    public var userChosenShoulderMotions: [ShoulderMotion] {
-        if let chosenMotionData = UserDefaults.standard.data(forKey: KEY_USER_CHOSEN_SHOULDER_MOTIONS){
-            let storer = NSKeyedUnarchiver.unarchiveObject(with: chosenMotionData) as! chosenShoulderMotionsStorer
-            return storer.chosenShoulderMotions
-        }
-        return [ShoulderMotion]()
-    }
-    
-    public func updateChosenParts(chosenParts: [BodyPart]){
-        let tmpStorer = chosenPartsStorer(chosenParts: chosenParts)
-        let storedData = NSKeyedArchiver.archivedData(withRootObject: tmpStorer)
-        UserDefaults.standard.set(storedData, forKey: KEY_USER_CHOSEN_PARTS)
-        UserDefaults.standard.synchronize()
-    }
-    
-    public func updateChosenMotion(chosenMotions: [PartMotion], part: BodyPart){
-        
-        switch part{
-        case .back:
-            let tmpStroer = chosenBackMotionsStorer(chosenMotions: chosenMotions as! [BackMotion])
-            let storedData = NSKeyedArchiver.archivedData(withRootObject: tmpStroer)
-            UserDefaults.standard.set(storedData, forKey: KEY_USER_CHOSEN_BACK_MOTIONS)
-        case .leg:
-            let tmpStroer = chosenLegMotionsStorer(chosenMotions: chosenMotions as! [LegMotion])
-            let storedData = NSKeyedArchiver.archivedData(withRootObject: tmpStroer)
-            UserDefaults.standard.set(storedData, forKey: KEY_USER_CHOSEN_LEG_MOTIONS)
-        case .shoulder:
-            let tmpStroer = chosenShoulderMotionsStorer(chosenMotions: chosenMotions as! [ShoulderMotion])
-            let storedData = NSKeyedArchiver.archivedData(withRootObject: tmpStroer)
-            UserDefaults.standard.set(storedData, forKey: KEY_USER_CHOSEN_SHOULDER_MOTIONS)
-        }
-        UserDefaults.standard.synchronize()
-    }
     
     
     // MARK: -
@@ -148,6 +90,8 @@ public class DataManager: NSObject {
             print("\(error)")
         }
     }
+    
+    
     
     // MARK: - computed property
     private var isFirstTime: Bool {
@@ -197,72 +141,8 @@ public class DataManager: NSObject {
     
 }
 
-// TODO: - Storer Helper Class -
 
 
-fileprivate class chosenPartsStorer: NSObject, NSCoding {
-    var chosenParts: [BodyPart]
-    
-    init(chosenParts: [BodyPart]) {
-        self.chosenParts = chosenParts
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        chosenParts =  aDecoder.decodeBodyPart(forKey: "chosenParts")
-    }
-    
-    func encode(with aCoder: NSCoder) {
-        aCoder.encodeBodyParts(parts: chosenParts, forKey: "chosenParts")
-    }
-}
-
-fileprivate class chosenLegMotionsStorer: NSObject, NSCoding {
-    var chosenLegMotions: [LegMotion]
-    
-    init(chosenMotions: [LegMotion]) {
-        self.chosenLegMotions = chosenMotions
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        chosenLegMotions = aDecoder.decodeLegMotions(forKey: "chosenLegMotions")
-    }
-    
-    func encode(with aCoder: NSCoder) {
-        aCoder.encodeLegMotions(motions: chosenLegMotions, forKey: "chosenLegMotions")
-    }
-}
-
-fileprivate class chosenBackMotionsStorer: NSObject, NSCoding {
-    var chosenBackMotions: [BackMotion]
-    
-    init(chosenMotions: [BackMotion]) {
-        self.chosenBackMotions = chosenMotions
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        chosenBackMotions = aDecoder.decodeBackMotions(forKey: "chosenBackMotions")
-    }
-    
-    func encode(with aCoder: NSCoder) {
-        aCoder.encodeBackMotions(motions: chosenBackMotions, forKey: "chosenBackMotions")
-    }
-}
-
-fileprivate class chosenShoulderMotionsStorer: NSObject, NSCoding {
-    var chosenShoulderMotions: [ShoulderMotion]
-    
-    init(chosenMotions: [ShoulderMotion]) {
-        self.chosenShoulderMotions = chosenMotions
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        chosenShoulderMotions = aDecoder.decodeShoulderMotions(forKey: "chosenShoulderMotions")
-    }
-    
-    func encode(with aCoder: NSCoder) {
-        aCoder.encodeShoulderMotions(motions: chosenShoulderMotions, forKey: "chosenShoulderMotions")
-    }
-}
 
 
 

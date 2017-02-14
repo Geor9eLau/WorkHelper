@@ -77,7 +77,7 @@ public protocol PartMotion{
 }
 
 class Motion: NSObject, NSCoding {
-    var motionId: String = ""
+    var motionId: String
 //    var name: String = ""
     var motionType: PartMotion
     var date: Date = Date()
@@ -86,10 +86,12 @@ class Motion: NSObject, NSCoding {
     var timeConsuming: UInt
     
     var exerciseConsuming: Float {
+        
         return weight * Float(repeats)
     }
     
-    init(weight: Float, repeats: UInt, timeConsuming: UInt, motionType: PartMotion) {
+    init(motionId: String, weight: Float, repeats: UInt, timeConsuming: UInt, motionType: PartMotion) {
+        self.motionId = motionId
         self.weight = weight
         self.repeats = repeats
         self.timeConsuming = timeConsuming
@@ -98,6 +100,7 @@ class Motion: NSObject, NSCoding {
     
     required init?(coder aDecoder: NSCoder) {
 //        name = aDecoder.decodeObject(forKey: "name") as! String
+        motionId = aDecoder.decodeObject(forKey: "motionId") as! String
         motionType = aDecoder.decodeObject(forKey: "motionType") as! PartMotion
         date = aDecoder.decodeObject(forKey: "date") as! Date
         weight = aDecoder.decodeObject(forKey: "weight") as! Float
@@ -107,6 +110,7 @@ class Motion: NSObject, NSCoding {
     
     func encode(with aCoder: NSCoder) {
 //        aCoder.encode(name, forKey: "name")
+        aCoder.encode(motionId, forKey: "motionId")
         aCoder.encode(motionType, forKey: "motionType")
         aCoder.encode(date, forKey: "date")
         aCoder.encode(weight, forKey: "weight")

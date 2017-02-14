@@ -10,13 +10,14 @@ import UIKit
 
 class ChooseCollectionCell: UICollectionViewCell {
 
+    @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var chooseLbl: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
 //        chooseLbl.adjustsFontSizeToFitWidth = true
-        chooseLbl.backgroundColor = UIColor.white
-        chooseLbl.layer.cornerRadius = frame.size.height / 2.0
+        chooseLbl.backgroundColor = UIColor.clear
+        chooseLbl.layer.cornerRadius = 5.0
         chooseLbl.layer.masksToBounds = true
     }
 }

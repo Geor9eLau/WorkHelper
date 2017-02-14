@@ -12,8 +12,10 @@ class HomePageViewController: BaseViewController, UICollectionViewDelegate, UICo
     
     private lazy var colltectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.itemSize = CGSize(width: (SCREEN_WIDTH - CHOOSE_ITEM_PADDING * 2) / 3, height: (SCREEN_WIDTH - CHOOSE_ITEM_PADDING * 2) / 3)
+        layout.itemSize = CGSize(width: 70, height:90.0)
         layout.minimumLineSpacing = 5.0;
+        
+        layout.sectionInset = UIEdgeInsetsMake(0, 20, 0, 20)
         let tmpCollectionView = UICollectionView(frame: CGRect(x: 0, y: 100, width: SCREEN_WIDTH , height: SCREEN_HEIGHT - 250), collectionViewLayout: layout)
         tmpCollectionView.delegate = self
         tmpCollectionView.dataSource = self
@@ -23,11 +25,17 @@ class HomePageViewController: BaseViewController, UICollectionViewDelegate, UICo
         return tmpCollectionView
     }()
     
-    private var dataSource: [BodyPart] = DataManager.sharedInstance.userChosenParts
+    private var recordTf: UITextField = {
+       let tmp = UITextField(frame: CGRect(x: 20, y: SCREEN_HEIGHT - 200, width: SCREEN_WIDTH - 40, height: 150))
+        tmp.allowsEditingTextAttributes = false
+        tmp.isEnabled = false
+        return tmp
+    }()
+    
+    private var dataSource: [BodyPart] = ALL_BODY_PART_CHOICES
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.setupButtons()
         title = "Home Page"
         view.addSubview(self.colltectionView)
         
@@ -36,29 +44,15 @@ class HomePageViewController: BaseViewController, UICollectionViewDelegate, UICo
 
     
     // MARK: - Private
-    
-    func setupButtons() {
-        let beginBtn = UIButton(frame: CGRect(x: (SCREEN_WIDTH / 2 - 150) / 2, y: SCREEN_HEIGHT - 49 - 80, width: 150, height: 50))
-        beginBtn.addTarget(self, action: #selector(beginBtnDidClicked), for: .touchUpInside)
-        beginBtn.setTitle("Start", for: .normal)
-        beginBtn.setTitleColor(UIColor.black, for: .normal)
-        view.addSubview(beginBtn)
+    private func setupUI() {
         
-        let finishBtn = UIButton(frame: CGRect(x: SCREEN_WIDTH / 2 + (SCREEN_WIDTH / 2 - 150) / 2, y:SCREEN_HEIGHT - 49 - 80, width: 150, height: 50))
-        finishBtn.addTarget(self, action: #selector(finishBtnDidClicked), for: .touchUpInside)
-        finishBtn.setTitle("Finish", for: .normal)
-        finishBtn.setTitleColor(UIColor.black, for: .normal)
-        view.addSubview(finishBtn)
+        
+    
     }
+    
     
     // MARK: - Event Handler
-    @objc private func beginBtnDidClicked() {
-        
-    }
     
-    @objc private func finishBtnDidClicked() {
-        
-    }
     
     // MARK: - UICollectionViewDataSource
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -68,6 +62,7 @@ class HomePageViewController: BaseViewController, UICollectionViewDelegate, UICo
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! ChooseCollectionCell
         let part = dataSource[indexPath.row]
+        cell.imgView.image = UIImage(named: "\(part.rawValue)")
         cell.chooseLbl.text = part.rawValue
         return cell
     }

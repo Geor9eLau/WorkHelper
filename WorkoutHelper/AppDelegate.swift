@@ -20,11 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.backgroundColor = UIColor.white
         
         var rootVC: UIViewController
-        if UserDefaults.standard.bool(forKey: "isFirstTime") {
-            rootVC = MenuViewController()
-        }else{
-            rootVC = UINavigationController(rootViewController: BodyPartSettingVC())
-        }
+        rootVC = MenuViewController()
+        
         
 
         

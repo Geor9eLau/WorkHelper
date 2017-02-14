@@ -12,16 +12,26 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="ChooseCollectionCell" customModule="WorkoutHelper" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+            <rect key="frame" x="0.0" y="0.0" width="75" height="95"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
-                <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                <rect key="frame" x="0.0" y="0.0" width="75" height="95"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="J6Z-dd-gn7">
+                        <rect key="frame" x="2.5" y="0.0" width="70" height="70"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="70" id="JFe-qM-Pho"/>
+                            <constraint firstAttribute="height" constant="70" id="kjy-MQ-UG4"/>
+                        </constraints>
+                    </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bp6-Mr-HkY">
-                        <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
+                        <rect key="frame" x="0.0" y="75" width="75" height="20"/>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="20" id="kxA-ZV-6NE"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
                         <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
@@ -29,13 +39,16 @@
             </view>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="bp6-Mr-HkY" secondAttribute="trailing" id="356-Tj-jxM"/>
+                <constraint firstItem="J6Z-dd-gn7" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="CF0-yq-gO7"/>
+                <constraint firstItem="J6Z-dd-gn7" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="Jyy-Nh-SOp"/>
                 <constraint firstItem="bp6-Mr-HkY" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="ozA-kX-UMJ"/>
                 <constraint firstAttribute="bottom" secondItem="bp6-Mr-HkY" secondAttribute="bottom" id="qqc-LI-q0c"/>
-                <constraint firstItem="bp6-Mr-HkY" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="uFk-go-sVP"/>
             </constraints>
             <connections>
                 <outlet property="chooseLbl" destination="bp6-Mr-HkY" id="r2c-jM-lbK"/>
+                <outlet property="imgView" destination="J6Z-dd-gn7" id="usp-gc-dnU"/>
             </connections>
+            <point key="canvasLocation" x="33.5" y="94.5"/>
         </collectionViewCell>
     </objects>
 </document>
