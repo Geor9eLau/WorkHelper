@@ -81,16 +81,16 @@ class Motion: NSObject, NSCoding {
 //    var name: String = ""
     var motionType: PartMotion
     var date: Date = Date()
-    var weight: Float
+    var weight: Double
     var repeats: UInt
     var timeConsuming: UInt
     
-    var exerciseConsuming: Float {
-        
-        return weight * Float(repeats)
-    }
+//    var exerciseConsuming: Float {
+//        
+//        return weight * Float(repeats)
+//    }
     
-    init(motionId: String, weight: Float, repeats: UInt, timeConsuming: UInt, motionType: PartMotion) {
+    init(motionId: String, weight: Double, repeats: UInt, timeConsuming: UInt, motionType: PartMotion) {
         self.motionId = motionId
         self.weight = weight
         self.repeats = repeats
@@ -101,9 +101,9 @@ class Motion: NSObject, NSCoding {
     required init?(coder aDecoder: NSCoder) {
 //        name = aDecoder.decodeObject(forKey: "name") as! String
         motionId = aDecoder.decodeObject(forKey: "motionId") as! String
-        motionType = aDecoder.decodeObject(forKey: "motionType") as! PartMotion
+        motionType = aDecoder.decodePartMotion(forKey: "motionType")!
         date = aDecoder.decodeObject(forKey: "date") as! Date
-        weight = aDecoder.decodeObject(forKey: "weight") as! Float
+        weight = aDecoder.decodeDouble(forKey: "weight")
         repeats = aDecoder.decodeObject(forKey: "repeats") as! UInt
         timeConsuming = aDecoder.decodeObject(forKey: "timeConsuming") as! UInt
     }
@@ -111,11 +111,11 @@ class Motion: NSObject, NSCoding {
     func encode(with aCoder: NSCoder) {
 //        aCoder.encode(name, forKey: "name")
         aCoder.encode(motionId, forKey: "motionId")
-        aCoder.encode(motionType, forKey: "motionType")
+        aCoder.encodePartMotion(partMotion: motionType, forkey: "motionType")
         aCoder.encode(date, forKey: "date")
         aCoder.encode(weight, forKey: "weight")
         aCoder.encode(repeats, forKey: "repeats")
-        aCoder.encode(timeConsuming, forKey: "timingConsuming")
+        aCoder.encode(timeConsuming, forKey: "timeConsuming")
     }
     
     
@@ -127,6 +127,7 @@ class Motion: NSObject, NSCoding {
 
 
 class Training: NSObject {
+    var trainingId: String
     var motions = [Motion]()
     var motionType: PartMotion
     var numberOfGroup: UInt{
@@ -139,15 +140,15 @@ class Training: NSObject {
         }
         return tmpTC
     }
-    var totalExerciseConsuming: Float{
-        var tmpEC: Float = 0
-        for motion in self.motions{
-            tmpEC = tmpEC + motion.weight * motion.weight
-        }
-        return tmpEC
-    }
-    var maxWeight: Float{
-        var tmpMax: Float = 0
+//    var totalExerciseConsuming: Float{
+//        var tmpEC:  = 0
+//        for motion in self.motions{
+//            tmpEC = tmpEC + motion.weight * motion.weight
+//        }
+//        return tmpEC
+//    }
+    var maxWeight: Double{
+        var tmpMax: Double = 0
         for motion in self.motions{
             if motion.weight > tmpMax{
                 tmpMax = motion.weight
@@ -155,20 +156,27 @@ class Training: NSObject {
         }
         return tmpMax
     }
-    var averageWeight: Float{
-        var tmpWeight:Float = 0
+    
+    
+    var averageWeight: Double{
+        var tmpWeight: Double = 0
         for motion in self.motions{
             tmpWeight = tmpWeight + motion.weight
         }
         return tmpWeight
     }
     var date: Date = Date()
-    var totoalWeight: Float{
-        return self.averageWeight * Float(self.motions.count)
+    var totoalRepeats: UInt{
+        var tmpRepeats: UInt = 0
+        for motion in self.motions{
+            tmpRepeats = tmpRepeats + motion.repeats
+        }
+        return tmpRepeats
     }
     
-    init(motionType: PartMotion) {
+    init(motionType: PartMotion, trainingId: String) {
         self.motionType = motionType
+        self.trainingId = trainingId
     }
     
     func addMotion(motion: Motion) {

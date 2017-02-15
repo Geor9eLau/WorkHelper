@@ -88,7 +88,7 @@ class Timer: UIView {
                 var timeCount = 3
                 self.countDownTimer.setEventHandler(handler: {
                     timeCount = timeCount - 1
-                    if timeCount >= 0 {
+                    if timeCount > 0 {
                         self.timerBtn.isUserInteractionEnabled = false
                         DispatchQueue.main.async {
                             self.timerBtn.setTitle("\(timeCount)", for: .normal)

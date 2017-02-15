@@ -57,17 +57,17 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstItem="pzR-2V-T6L" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="2Hw-Q9-oGd"/>
                     <constraint firstItem="zUz-dh-9bY" firstAttribute="leading" secondItem="cdt-Kg-uOW" secondAttribute="trailing" id="2ma-7l-Od1"/>
+                    <constraint firstItem="pzR-2V-T6L" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="7TH-Me-TDq"/>
                     <constraint firstItem="U1b-Nd-dda" firstAttribute="width" secondItem="cdt-Kg-uOW" secondAttribute="width" id="7aw-cs-deX"/>
                     <constraint firstItem="U1b-Nd-dda" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="IZz-nc-bLR"/>
                     <constraint firstItem="cdt-Kg-uOW" firstAttribute="width" secondItem="zUz-dh-9bY" secondAttribute="width" id="NfK-x4-c8c"/>
                     <constraint firstItem="zUz-dh-9bY" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="bvS-nh-sXp"/>
+                    <constraint firstAttribute="trailing" secondItem="zUz-dh-9bY" secondAttribute="trailing" id="ijV-zH-XoJ"/>
                     <constraint firstItem="cdt-Kg-uOW" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="kNS-iH-VzM"/>
                     <constraint firstItem="U1b-Nd-dda" firstAttribute="leading" secondItem="pzR-2V-T6L" secondAttribute="trailing" id="lhb-Wp-jPW"/>
                     <constraint firstItem="pzR-2V-T6L" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="nzL-mG-02e"/>
                     <constraint firstItem="cdt-Kg-uOW" firstAttribute="leading" secondItem="U1b-Nd-dda" secondAttribute="trailing" id="wUk-qH-06d"/>
-                    <constraint firstAttribute="trailing" secondItem="zUz-dh-9bY" secondAttribute="trailing" id="zzg-wn-h1v"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

@@ -38,35 +38,38 @@ public class DataManager: NSObject {
     
     // MARK: - Training
     private let trainingTable = Table("Training")
+    private let trainingId = Expression<String>("trainingId")
     private let motions = Expression<Blob>("motions")
     private let numberOfGroup = Expression<Int64>("numberOfGroup")
     private let totalTimeConsuming = Expression<Int64>("totalTimeConsuming")
-    private let totalExerciseConsuming = Expression<Double>("totalExerciseConsuming")
+    private let totalRepeats = Expression<Int64>("totalRepeats")
+//    private let totalExerciseConsuming = Expression<Double>("totalExerciseConsuming")
     private let maxWeight = Expression<Double>("maxWeight")
     private let averageWeight = Expression<Double>("averageWeight")
-    private let totalWeight = Expression<Double>("totalWeight")
+//    private let totalWeight = Expression<Double>("totalWeight")
+
+    // MARK: - Record
+    private let recordTable = Table("Record")
     
     
     
-    
+    // MARK: - 
     // MARK: -
-    func addTrainingRecord(training: Training) {
+    private func addTrainingRecord(training: Training) {
         do{
             let dateMatter = DateFormatter()
             dateMatter.dateFormat = "yyyy-MM-dd"
             let dateStr = dateMatter.string(from: training.date)
-            
             let motionsData = NSKeyedArchiver.archivedData(withRootObject: training.motions)
-            try dataBase?.run(trainingTable.insert(numberOfGroup <- Int64(training.numberOfGroup),
+            try dataBase?.run(trainingTable.insert(or: .replace,numberOfGroup <- Int64(training.numberOfGroup),
                                                    totalTimeConsuming <- Int64(training.totalTimeConsuming),
-                                                   totalExerciseConsuming <- Double(training.totalExerciseConsuming),
+                                                   trainingId <- training.trainingId,
                                                    averageWeight <- Double(training.averageWeight),
-                                                   maxWeight <- Double(training.maxWeight), totalWeight <- Double(training.totoalWeight),
+                                                   maxWeight <- Double(training.maxWeight), totalRepeats <- Int64(training.totoalRepeats),
                                                    date <- dateStr,
                                                    motionTypeName <- training.motionType.motionName,
                                                    motionTypePart <- training.motionType.part.rawValue,
-                                                   motions <- motionsData.datatypeValue,
-                                                   totalWeight <- Double(training.totoalWeight)
+                                                   motions <- motionsData.datatypeValue
                                                    ))
         }
         catch let error{
@@ -91,12 +94,91 @@ public class DataManager: NSObject {
         }
     }
     
+    func updateRecord(training: Training) {
+        self.addTrainingRecord(training: training)
+        
+        let record = Record(motion: training.motionType)
+        record.maxWeight = training.maxWeight
+        record.totalRepeats = training.totoalRepeats
+        record.totalTimeConsuming = training.totalTimeConsuming
+        
+        if let oldRecord = self.getRecord(motion: training.motionType){
+            if oldRecord.maxWeight > record.maxWeight{
+                record.maxWeight = oldRecord.maxWeight
+            }
+            record.totalRepeats = record.totalRepeats + oldRecord.totalRepeats
+            record.totalTimeConsuming = record.totalTimeConsuming + oldRecord.totalTimeConsuming
+        }
+        
+        do{
+            try dataBase?.run(recordTable.insert(or: .replace, motionTypeName <- record.motion.motionName, maxWeight <- record.maxWeight, totalRepeats <- Int64(record.totalRepeats), totalTimeConsuming <- Int64(record.totalTimeConsuming)))
+        }catch let error{
+            print("\(error)")
+        }
+        
+    }
     
+    func getRecord(motion: PartMotion) -> Record?{
+        do{
+            if let tmpRecordArr = try dataBase?.prepare(recordTable.filter(motionTypeName == motion.motionName && motionTypePart == motion.part.rawValue)){
+                for recordDic in tmpRecordArr{
+                    let partName = recordDic.get(motionTypePart)
+                    let motionName = recordDic.get(motionTypeName)
+                    var motion: PartMotion
+                    let part = BodyPart(rawValue: partName)!
+                    switch part {
+                    case .back:
+                        motion = BackMotion(rawValue: motionName)!
+                    case .leg:
+                        motion = LegMotion(rawValue: motionName)!
+                    case .shoulder:
+                        motion = ShoulderMotion(rawValue: motionName)!
+                    }
+                    
+                    let record = Record(motion: motion)
+                    record.maxWeight = recordDic.get(maxWeight)
+                    record.totalRepeats = UInt(recordDic.get(totalRepeats))
+                    record.totalTimeConsuming = UInt(recordDic.get(totalTimeConsuming))
+                    
+                    return record
+                }
+            }
+        } catch let error{
+            print("\(error)")
+        }
+        return nil
+    }
+    
+    func getMotionBeginingNO(motion: PartMotion) -> UInt{
+        if let trainingRecord = self.getTrainingRecord(motion: motion, trainingDate: Date()){
+            return trainingRecord.numberOfGroup + 1
+        }
+        return 1
+    }
+    
+    func getTrainingRecord(motion: PartMotion, trainingDate: Date) -> Training? {
+        do{
+            if let tmpTrainingArr = try dataBase?.prepare(trainingTable.filter(motionTypeName == motion.motionName && motionTypePart == motion.part.rawValue && date == Util.transformDateToDateStr(date: trainingDate))){
+                for trainingDic in tmpTrainingArr {
+                    let id = trainingDic.get(trainingId)
+                    let motionsData = trainingDic.get(motions).bytes
+                    let motionsArr = NSKeyedUnarchiver.unarchiveObject(with: Data(bytes: motionsData)) as? [Motion]
+                    let training = Training(motionType: motion, trainingId: id)
+                    training.motions = motionsArr!
+                    return training
+                }
+            }
+            
+        }catch let error{
+            print("\(error)")
+        }
+        return nil
+    }
     
     // MARK: - computed property
-    private var isFirstTime: Bool {
-        return UserDefaults.standard.bool(forKey: "isFirstTime")
-    }
+//    private var isFirstTime: Bool {
+//        return UserDefaults.standard.bool(forKey: "isFirstTime")
+//    }
     
     
     // MARK: - used to build singleton
@@ -111,8 +193,8 @@ public class DataManager: NSObject {
         
         
         do {
-            try dataBase?.run(motionTable.create { t in
-                t.column(motionId)
+            try dataBase?.run(motionTable.create(ifNotExists: true) { t in
+                t.column(motionId, primaryKey: true)
 //                t.column(name)
                 t.column(motionTypeName)
                 t.column(motionTypePart)
@@ -122,16 +204,24 @@ public class DataManager: NSObject {
                 t.column(timingConsuming)
             })
             
-            try dataBase?.run(trainingTable.create { t in
+            try dataBase?.run(trainingTable.create(ifNotExists: true) { t in
+                t.column(trainingId, primaryKey: true)
+                t.column(motions)
                 t.column(numberOfGroup)
                 t.column(motionTypeName)
                 t.column(motionTypePart)
                 t.column(date)
                 t.column(totalTimeConsuming)
                 t.column(maxWeight)
-                t.column(totalWeight)
+                t.column(totalRepeats)
                 t.column(averageWeight)
-                t.column(totalExerciseConsuming)
+            })
+            
+            try dataBase?.run(recordTable.create(ifNotExists: true) { t in
+                t.column(motionTypeName, primaryKey: true)
+                t.column(totalTimeConsuming)
+                t.column(maxWeight)
+                t.column(totalRepeats)
             })
         }
         catch let error{

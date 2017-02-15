@@ -1,2 +1,3 @@
 github "stephencelis/SQLite.swift" "0.11.2"
+github "i-schuetz/SwiftCharts" "0.5.1"
 github "devxoul/Toaster" "2.0.2"

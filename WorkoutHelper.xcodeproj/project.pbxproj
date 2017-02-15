@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5E0338861E529CA90080C80C /* RecordTableSectionHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0338851E529CA90080C80C /* RecordTableSectionHeaderView.swift */; };
+		5E03388A1E52A8AF0080C80C /* LWHChartView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E0338891E52A8AF0080C80C /* LWHChartView.swift */; };
 		5E0D45121E4C180B00914048 /* Toaster.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0D45111E4C180B00914048 /* Toaster.framework */; };
 		5E0D45131E4C180B00914048 /* Toaster.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5E0D45111E4C180B00914048 /* Toaster.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		5E0D45151E4C182A00914048 /* Toaster.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5E0D45141E4C182A00914048 /* Toaster.framework.dSYM */; };
@@ -45,6 +46,10 @@
 		5ED745141E4D590C00D7577C /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ED745111E4D590C00D7577C /* back.png */; };
 		5ED745151E4D590C00D7577C /* leg.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ED745121E4D590C00D7577C /* leg.png */; };
 		5ED745161E4D590C00D7577C /* shoulder.png in Resources */ = {isa = PBXBuildFile; fileRef = 5ED745131E4D590C00D7577C /* shoulder.png */; };
+		5EDB7C5D1E53F03E00BE7CA5 /* Record.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EDB7C5C1E53F03E00BE7CA5 /* Record.swift */; };
+		5EDB7C5F1E54503200BE7CA5 /* SwiftCharts.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 5EDB7C5E1E54503200BE7CA5 /* SwiftCharts.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		5EDB7C601E54505000BE7CA5 /* SwiftCharts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EDB7C5E1E54503200BE7CA5 /* SwiftCharts.framework */; };
+		5EDB7C621E54506900BE7CA5 /* SwiftCharts.framework.dSYM in CopyFiles */ = {isa = PBXBuildFile; fileRef = 5EDB7C611E54506900BE7CA5 /* SwiftCharts.framework.dSYM */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +76,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				5EDB7C5F1E54503200BE7CA5 /* SwiftCharts.framework in Embed Frameworks */,
 				5E2594EC1E126CA100BBF24A /* SQLite.framework in Embed Frameworks */,
 				5E0D45131E4C180B00914048 /* Toaster.framework in Embed Frameworks */,
 			);
@@ -83,6 +89,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 16;
 			files = (
+				5EDB7C621E54506900BE7CA5 /* SwiftCharts.framework.dSYM in CopyFiles */,
 				5E0D45151E4C182A00914048 /* Toaster.framework.dSYM in CopyFiles */,
 				5E2594F01E126CFB00BBF24A /* SQLite.framework.dSYM in CopyFiles */,
 			);
@@ -92,6 +99,7 @@
 
 /* Begin PBXFileReference section */
 		5E0338851E529CA90080C80C /* RecordTableSectionHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordTableSectionHeaderView.swift; sourceTree = "<group>"; };
+		5E0338891E52A8AF0080C80C /* LWHChartView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LWHChartView.swift; sourceTree = "<group>"; };
 		5E0D45111E4C180B00914048 /* Toaster.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Toaster.framework; path = Carthage/Build/iOS/Toaster.framework; sourceTree = "<group>"; };
 		5E0D45141E4C182A00914048 /* Toaster.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = Toaster.framework.dSYM; path = Carthage/Build/iOS/Toaster.framework.dSYM; sourceTree = "<group>"; };
 		5E0D45161E4C5B4C00914048 /* SweetAlert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SweetAlert.swift; sourceTree = "<group>"; };
@@ -133,6 +141,9 @@
 		5ED745111E4D590C00D7577C /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
 		5ED745121E4D590C00D7577C /* leg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leg.png; sourceTree = "<group>"; };
 		5ED745131E4D590C00D7577C /* shoulder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shoulder.png; sourceTree = "<group>"; };
+		5EDB7C5C1E53F03E00BE7CA5 /* Record.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Record.swift; sourceTree = "<group>"; };
+		5EDB7C5E1E54503200BE7CA5 /* SwiftCharts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftCharts.framework; path = Carthage/Build/iOS/SwiftCharts.framework; sourceTree = "<group>"; };
+		5EDB7C611E54506900BE7CA5 /* SwiftCharts.framework.dSYM */ = {isa = PBXFileReference; lastKnownFileType = wrapper.dsym; name = SwiftCharts.framework.dSYM; path = Carthage/Build/iOS/SwiftCharts.framework.dSYM; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -140,6 +151,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EDB7C601E54505000BE7CA5 /* SwiftCharts.framework in Frameworks */,
 				5E2594EB1E126CA100BBF24A /* SQLite.framework in Frameworks */,
 				5E0D45121E4C180B00914048 /* Toaster.framework in Frameworks */,
 			);
@@ -162,12 +174,28 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5E0338871E52A8830080C80C /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5E9F540C1E00DDFF00D1E9C0 /* ChooseCollectionCell.swift */,
+				5E9F540D1E00DDFF00D1E9C0 /* ChooseCollectionCell.xib */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		5E0338881E52A8960080C80C /* ChartView */ = {
+			isa = PBXGroup;
+			children = (
+				5E0338891E52A8AF0080C80C /* LWHChartView.swift */,
+			);
+			name = ChartView;
+			sourceTree = "<group>";
+		};
 		5E55DA391E46D54B000F2F2B /* ChooseView */ = {
 			isa = PBXGroup;
 			children = (
 				5E9F54041DFFE1F100D1E9C0 /* CustomChooseView.swift */,
-				5E9F540C1E00DDFF00D1E9C0 /* ChooseCollectionCell.swift */,
-				5E9F540D1E00DDFF00D1E9C0 /* ChooseCollectionCell.xib */,
+				5E0338871E52A8830080C80C /* Cell */,
 			);
 			name = ChooseView;
 			sourceTree = "<group>";
@@ -183,6 +211,8 @@
 		5E9F53BA1DFFA38400D1E9C0 = {
 			isa = PBXGroup;
 			children = (
+				5EDB7C611E54506900BE7CA5 /* SwiftCharts.framework.dSYM */,
+				5EDB7C5E1E54503200BE7CA5 /* SwiftCharts.framework */,
 				5ED7450F1E4D58CB00D7577C /* Framework */,
 				5E9F53C51DFFA38400D1E9C0 /* WorkoutHelper */,
 				5E9F53DA1DFFA38400D1E9C0 /* WorkoutHelperTests */,
@@ -248,6 +278,7 @@
 			isa = PBXGroup;
 			children = (
 				5E9F53F41DFFA44E00D1E9C0 /* Training.swift */,
+				5EDB7C5C1E53F03E00BE7CA5 /* Record.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -255,6 +286,7 @@
 		5E9F540B1E00DDD900D1E9C0 /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
+				5E0338881E52A8960080C80C /* ChartView */,
 				5EAEE50B1E51929A00D22276 /* InfoRecordView */,
 				5EAEE5031E515EEA00D22276 /* RecordTable */,
 				5E55DA3A1E46D555000F2F2B /* Timer */,
@@ -482,10 +514,12 @@
 				5EAEE50D1E5192E200D22276 /* InfoRecordView.swift in Sources */,
 				5EAEE5051E515F1200D22276 /* RecordTable.swift in Sources */,
 				5E25947D1E10F0D900BBF24A /* SettingViewController.swift in Sources */,
+				5E03388A1E52A8AF0080C80C /* LWHChartView.swift in Sources */,
 				5E9F541D1E022E1500D1E9C0 /* Extension.swift in Sources */,
 				5E9F53C91DFFA38400D1E9C0 /* ViewController.swift in Sources */,
 				5E55DA3C1E46D58A000F2F2B /* Timer.swift in Sources */,
 				5E25947F1E10FC0400BBF24A /* MotionViewController.swift in Sources */,
+				5EDB7C5D1E53F03E00BE7CA5 /* Record.swift in Sources */,
 				5E9F53F81DFFD41E00D1E9C0 /* BaseViewController.swift in Sources */,
 				5E0D45171E4C5B4C00914048 /* SweetAlert.swift in Sources */,
 				5EAEE5081E515F3100D22276 /* RecordTableViewCell.swift in Sources */,

@@ -15,7 +15,14 @@ class MotionViewController: BaseViewController, UINavigationControllerDelegate,C
         return (self.motionBtn.isSelected)
     }
     public var part: BodyPart
-    private var chosenMotion: PartMotion?
+    private var chosenMotion: PartMotion? {
+        didSet{
+            if let training = DataManager.sharedInstance.getTrainingRecord(motion: chosenMotion! , trainingDate: Date()){
+                self.recordTable.addRecords(motions: training.motions)
+                currentGroupNo = training.numberOfGroup + 1
+            }
+        }
+    }
     
     
     private var motionTitleLbl: UILabel = {
@@ -68,7 +75,7 @@ class MotionViewController: BaseViewController, UINavigationControllerDelegate,C
     }()
     
     private var tmpTimeConsuming: UInt = 0
-    private var currentGroupNo: UInt = 0
+    private var currentGroupNo: UInt = 1
 //    private var tmpMotion: Motion?
     private var training: Training?
     
@@ -110,7 +117,10 @@ class MotionViewController: BaseViewController, UINavigationControllerDelegate,C
     @objc func backBtnDidClicked() {
         _ = SweetAlert().showAlert("Message", subTitle: "Do you finish the training?", style: .warning, buttonTitle: "Yes", buttonColor: UIColor.green, otherButtonTitle: "No") { (isOtherBtn) in
             if isOtherBtn{
-                _ = self.navigationController?.popViewController(animated: true)
+                if let training = self.training{
+                    DataManager.sharedInstance.updateRecord(training: training)
+                    _ = self.navigationController?.popViewController(animated: true)
+                }
             }else{
                 
             }
@@ -160,10 +170,10 @@ class MotionViewController: BaseViewController, UINavigationControllerDelegate,C
     // MARK: - InfoRecordViewDelegate
     func recordDidFinished(weight: Double, repeats: Int) {
         currentGroupNo = currentGroupNo + 1
-        let motion = Motion.init(motionId:"\(self.chosenMotion?.motionName) \(Util.transformDateToDateStr(date: Date()))-\(currentGroupNo)", weight: Float(weight), repeats: UInt(repeats), timeConsuming: self.tmpTimeConsuming, motionType: self.chosenMotion!)
+        let motion = Motion.init(motionId:"\(self.chosenMotion!.motionName) \(Util.transformDateToDateStr(date: Date()))-\(currentGroupNo)", weight: weight, repeats: UInt(repeats), timeConsuming: self.tmpTimeConsuming, motionType: self.chosenMotion!)
         DataManager.sharedInstance.addMotionRecord(motion: motion)
         if self.training == nil {
-            self.training = Training.init(motionType: self.chosenMotion!)
+            self.training = Training.init(motionType: self.chosenMotion!, trainingId: "\(self.chosenMotion!.motionName) \(Util.transformDateToDateStr(date: Date()))")
             self.training?.date = motion.date
         }
         self.training?.addMotion(motion: motion)

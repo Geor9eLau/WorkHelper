@@ -27,12 +27,22 @@ class RecordTable: UIView, UITableViewDataSource, UITableViewDelegate {
         return tmp
     }()
     
-    private var rows: Int = 8
+    private var rows: Int = 6
     private var dataSource: [Motion] = []
     
     // MARK: -Public
     public func addRecord(motion: Motion) {
         dataSource.append(motion)
+        if dataSource.count > rows {
+            rows = rows + 1
+        }
+        tableView.reloadData()
+    }
+    
+    public func addRecords(motions: [Motion]){
+        for motion in motions{
+            dataSource.append(motion)
+        }
         if dataSource.count > rows {
             rows = rows + 1
         }
@@ -78,7 +88,7 @@ class RecordTable: UIView, UITableViewDataSource, UITableViewDelegate {
             cell.timeLbl.textColor = UIColor.blue
             
             if dataSource.count > 0
-                && dataSource.count >= indexPath.row {
+                && dataSource.count > indexPath.row{
                 let motion = dataSource[indexPath.row]
                 cell.weightLbl.text = "\(motion.weight)"
                 cell.repeatsLbl.text = "\(motion.repeats)"
