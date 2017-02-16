@@ -13,11 +13,15 @@ class MenuViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let homePageVC = UINavigationController(rootViewController: HomePageViewController())
-        let graphDataVC = UINavigationController(rootViewController: GraphDataViewController())
+        let homePageVC = UINavigationController(rootViewController: HomePageViewController(nibName: "HomePageViewController", bundle: nil))
+        let graphicDataVC = UINavigationController(rootViewController: GraphicDataViewController())
         let settingVC = UINavigationController(rootViewController: SettingViewController())
         
-        viewControllers = [homePageVC, graphDataVC, settingVC]
+        homePageVC.tabBarItem.title = "HomePage"
+        graphicDataVC.tabBarItem.title = "Data"
+        settingVC.tabBarItem.title = "Setting"
+        viewControllers = [graphicDataVC, homePageVC, settingVC]
+        
         selectedViewController = homePageVC
         // Do any additional setup after loading the view.
     }

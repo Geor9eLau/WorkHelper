@@ -159,7 +159,7 @@ class InfoRecordView: UIView {
         self.weight = Double(self.weightTf.text!)!
         
         
-        UIView.animate(withDuration: 1, animations: {[weak self] in
+        UIView.animate(withDuration: 0.5, animations: {[weak self] in
             let originalFrame = self?.weightRecordBackView.frame
             self?.weightRecordBackView.frame = CGRect(x: CGFloat(Double((originalFrame?.origin.x)!) - SCREEN_WIDTH), y: CGFloat(Double((originalFrame?.origin.y)!)), width: (originalFrame?.size.width)!, height: (originalFrame?.size.height)!)
             self?.repeatsRecordBackView.frame = originalFrame!

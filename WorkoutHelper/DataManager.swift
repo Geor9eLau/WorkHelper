@@ -111,7 +111,7 @@ public class DataManager: NSObject {
         }
         
         do{
-            try dataBase?.run(recordTable.insert(or: .replace, motionTypeName <- record.motion.motionName, maxWeight <- record.maxWeight, totalRepeats <- Int64(record.totalRepeats), totalTimeConsuming <- Int64(record.totalTimeConsuming)))
+            try dataBase?.run(recordTable.insert(or: .replace, motionTypeName <- record.motion.motionName, motionTypePart <- record.motion.part.rawValue, maxWeight <- record.maxWeight, totalRepeats <- Int64(record.totalRepeats), totalTimeConsuming <- Int64(record.totalTimeConsuming)))
         }catch let error{
             print("\(error)")
         }
@@ -149,12 +149,6 @@ public class DataManager: NSObject {
         return nil
     }
     
-    func getMotionBeginingNO(motion: PartMotion) -> UInt{
-        if let trainingRecord = self.getTrainingRecord(motion: motion, trainingDate: Date()){
-            return trainingRecord.numberOfGroup + 1
-        }
-        return 1
-    }
     
     func getTrainingRecord(motion: PartMotion, trainingDate: Date) -> Training? {
         do{
@@ -174,6 +168,50 @@ public class DataManager: NSObject {
         }
         return nil
     }
+    
+    
+    func getRecordDescription(part: BodyPart) -> String {
+        var recordDecp = "You've finished: \n"
+        do {
+            if let recordsArr = try dataBase?.prepare(recordTable.select(motionTypeName, totalRepeats).filter(motionTypePart == part.rawValue)){
+                
+                for record in recordsArr{
+//                    let attributedStr = NSAttributedString(string: "\(record.get(totalRepeats)) \(record.get(motionTypeName))", attributes: [n])
+                    recordDecp.append("\(record.get(totalRepeats)) \(record.get(motionTypeName)) \n")
+                }
+                if recordDecp.characters.count > "You've finished ".characters.count{
+                    return recordDecp
+                }else{
+                    return "Have no record~"
+                }
+            }
+        }catch let error{
+            print("\(error)")
+        }
+        return "Have no record~"
+    }
+    
+    
+    func getAllTrainingRecord(motion: PartMotion) -> [Training] {
+        var result = [Training]()
+        do{
+            if let tmp = try dataBase?.prepare(trainingTable.filter(motionTypeName == motion.motionName && motionTypePart == motion.part.rawValue)){
+                for row in tmp {
+                    let id = row.get(trainingId)
+                    let motionsData = row.get(motions).bytes
+                    let motionsArr = NSKeyedUnarchiver.unarchiveObject(with: Data(bytes: motionsData)) as? [Motion]
+                    let training = Training(motionType: motion, trainingId: id)
+                    training.motions = motionsArr!
+                    result.append(training)
+                }
+            }
+        } catch let error{
+            print("\(error)")
+        }
+        return result
+    }
+    
+    
     
     // MARK: - computed property
 //    private var isFirstTime: Bool {
@@ -219,6 +257,7 @@ public class DataManager: NSObject {
             
             try dataBase?.run(recordTable.create(ifNotExists: true) { t in
                 t.column(motionTypeName, primaryKey: true)
+                t.column(motionTypePart)
                 t.column(totalTimeConsuming)
                 t.column(maxWeight)
                 t.column(totalRepeats)

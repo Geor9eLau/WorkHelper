@@ -40,6 +40,7 @@ class RecordTable: UIView, UITableViewDataSource, UITableViewDelegate {
     }
     
     public func addRecords(motions: [Motion]){
+        dataSource.removeAll()
         for motion in motions{
             dataSource.append(motion)
         }

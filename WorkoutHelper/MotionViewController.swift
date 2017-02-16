@@ -119,8 +119,9 @@ class MotionViewController: BaseViewController, UINavigationControllerDelegate,C
             if isOtherBtn{
                 if let training = self.training{
                     DataManager.sharedInstance.updateRecord(training: training)
-                    _ = self.navigationController?.popViewController(animated: true)
+                    
                 }
+                _ = self.navigationController?.popViewController(animated: true)
             }else{
                 
             }
@@ -136,11 +137,18 @@ class MotionViewController: BaseViewController, UINavigationControllerDelegate,C
     // MARK: - ChooseViewDelegate
     func choose(item: Any) {
         if let motion = item as? PartMotion{
+            if let training = self.training{
+                DataManager.sharedInstance.updateRecord(training: training)
+            }
+           training = nil
+            currentGroupNo = 1
+            tmpTimeConsuming = 0
             self.chosenMotion = motion
             motionBtn.isSelected = true
             motionBtn.setTitleColor(UIColor.red, for: .selected)
             motionBtn.setTitle(motion.motionName, for: .selected)
         }
+        
     }
     
     // MARK: - TimerDelegate
