@@ -9,27 +9,27 @@
 import Foundation
 
 public enum BodyPart: String {
-    case leg
-    case back
-    case shoulder
+    case chest = "Chest"
+    case back = "Back"
+    case shoulder = "Shoulder"
+    case abs = "Abs"
+    case quadriceps = "Quadriceps"
     static public func ==(lhs: BodyPart, rhs: BodyPart) -> Bool{
         return lhs.rawValue == rhs.rawValue
     }
 }
 
-public enum LegMotion: String, PartMotion{
+public enum QuadricepsMotion: String, PartMotion{
     public var part: BodyPart {
-        return .leg
+        return .quadriceps
     }
     
     public var motionName: String {
         return self.rawValue
     }
-    case motion1
-    case motion2
-    case motion3
+    case motion1 = "BARBELL SQUAT"
     
-    static public func ==(lhs: LegMotion, rhs: LegMotion) -> Bool{
+    static public func ==(lhs: QuadricepsMotion, rhs: QuadricepsMotion) -> Bool{
         return lhs.motionName == rhs.motionName
     }
 }
@@ -44,9 +44,11 @@ public enum BackMotion: String, PartMotion{
         return self.rawValue
     }
     
-    case motion1
-    case motion2
-    case motion3
+    case motion1 = "MACHINE-ASSISTED PULL-UP"
+    case motion2 = "BARBELL BENT-OVER Row"
+    case motion3 = "SEATED CABLE ROWS"
+    case moition4 = "PULL-DOWN"
+    
     
     static public func ==(lhs: BackMotion, rhs: BackMotion) -> Bool{
         return lhs.motionName == rhs.motionName
@@ -62,11 +64,51 @@ public enum ShoulderMotion: String, PartMotion, Equatable{
         return self.rawValue
     }
     
-    case motion1
-    case motion2
-    case motion3
+    case motion1 = "FRONT RAISE"
+    case motion2 = "LATERAL RAISE"
+    case motion3 = "BACK FLYES"
+    case motion4 = "CABLE SEATED LATERAL RAISE"
     
     static public func ==(lhs: ShoulderMotion, rhs: ShoulderMotion) -> Bool{
+        return lhs.motionName == rhs.motionName
+    }
+}
+
+public enum ChestMotion: String, PartMotion, Equatable{
+    public var part: BodyPart {
+        return .chest
+    }
+    
+    public var motionName: String {
+        return self.rawValue
+    }
+    
+    case motion1 = "BARBELL BENCH PRESS"
+    case motion2 = "BARBELL INCLINE BENCH PRESS"
+    case motion3 = "BUTTERFLY"
+    case motion4 = "CABLE CROSSOVER"
+    
+    static public func ==(lhs: ChestMotion, rhs: ChestMotion) -> Bool{
+        return lhs.motionName == rhs.motionName
+    }
+}
+
+public enum AbsMotion: String, PartMotion, Equatable{
+    public var part: BodyPart {
+        return .abs
+    }
+    
+    public var motionName: String {
+        return self.rawValue
+    }
+    
+    case motion1 = "ALTERNATE HEEL TOUCHERS"
+    case motion2 = "BOTTOMS UP"
+    case motion3 = "SEATED LEG TUCKS"
+    case motion4 = "TWIST"
+    case motion5 = "George Way"
+    
+    static public func ==(lhs: AbsMotion, rhs: ChestMotion) -> Bool{
         return lhs.motionName == rhs.motionName
     }
 }

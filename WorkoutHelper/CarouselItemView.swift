@@ -21,9 +21,9 @@ class CarouselItemView: UIView {
     var titleLbl: UILabel
     
     override init(frame: CGRect) {
-        imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: frame.size.width, height: frame.size.height * 0.85))
+        imgView = UIImageView(frame: CGRect(x: (frame.size.width - 100) / 2, y: (frame.size.height * 0.85 - 100) / 2, width: 100, height: 100))
         titleLbl = UILabel(frame: CGRect(x: 0, y: frame.size.height * 0.85, width: frame.size.width, height: frame.size.height * 0.15))
-        titleLbl.font = UIFont.systemFont(ofSize: 25)
+        titleLbl.font = UIFont.systemFont(ofSize: 20)
         titleLbl.textAlignment = .center
         
         super.init(frame: frame)

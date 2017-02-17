@@ -38,9 +38,20 @@
 		5E9F540F1E00DDFF00D1E9C0 /* ChooseCollectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5E9F540D1E00DDFF00D1E9C0 /* ChooseCollectionCell.xib */; };
 		5E9F54121E00F97800D1E9C0 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F54111E00F97800D1E9C0 /* Util.swift */; };
 		5E9F541D1E022E1500D1E9C0 /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E9F541C1E022E1500D1E9C0 /* Extension.swift */; };
-		5EA90DED1E559B8C00E5E632 /* back.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA90DEA1E559B8C00E5E632 /* back.png */; };
-		5EA90DEE1E559B8C00E5E632 /* leg.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA90DEB1E559B8C00E5E632 /* leg.png */; };
-		5EA90DEF1E559B8C00E5E632 /* shoulder.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA90DEC1E559B8C00E5E632 /* shoulder.png */; };
+		5EA90DED1E559B8C00E5E632 /* Back.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA90DEA1E559B8C00E5E632 /* Back.png */; };
+		5EA90DEF1E559B8C00E5E632 /* Shoulder.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA90DEC1E559B8C00E5E632 /* Shoulder.png */; };
+		5EA90DF31E56D3A800E5E632 /* Chest.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA90DF01E56D3A800E5E632 /* Chest.png */; };
+		5EA90DF41E56D3A800E5E632 /* Abs.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA90DF11E56D3A800E5E632 /* Abs.png */; };
+		5EA90DF51E56D3A800E5E632 /* Quadriceps.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA90DF21E56D3A800E5E632 /* Quadriceps.png */; };
+		5EA90DFB1E56DAF100E5E632 /* BARBELL BENCH PRESS.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA90DF61E56DAF100E5E632 /* BARBELL BENCH PRESS.png */; };
+		5EA90DFC1E56DAF100E5E632 /* Bench Press With Dumbbells Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA90DF71E56DAF100E5E632 /* Bench Press With Dumbbells Filled-100.png */; };
+		5EA90DFD1E56DAF100E5E632 /* PULL-UP.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA90DF81E56DAF100E5E632 /* PULL-UP.png */; };
+		5EA90DFE1E56DAF100E5E632 /* Pushups Filled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA90DF91E56DAF100E5E632 /* Pushups Filled-100.png */; };
+		5EA90DFF1E56DAF100E5E632 /* SEATED CABLE ROWS.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA90DFA1E56DAF100E5E632 /* SEATED CABLE ROWS.png */; };
+		5EA90E041E56DBEA00E5E632 /* BARBELL SQUAT.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA90E001E56DBEA00E5E632 /* BARBELL SQUAT.png */; };
+		5EA90E051E56DBEA00E5E632 /* 屏幕快照 2017-02-17 下午3.19.16.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA90E011E56DBEA00E5E632 /* 屏幕快照 2017-02-17 下午3.19.16.png */; };
+		5EA90E061E56DBEA00E5E632 /* PULLDOWN.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA90E021E56DBEA00E5E632 /* PULLDOWN.png */; };
+		5EA90E071E56DBEA00E5E632 /* BARBELL INCLINE BENCH PRESS.png in Resources */ = {isa = PBXBuildFile; fileRef = 5EA90E031E56DBEA00E5E632 /* BARBELL INCLINE BENCH PRESS.png */; };
 		5EAEE5051E515F1200D22276 /* RecordTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAEE5041E515F1200D22276 /* RecordTable.swift */; };
 		5EAEE5081E515F3100D22276 /* RecordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EAEE5061E515F3100D22276 /* RecordTableViewCell.swift */; };
 		5EAEE5091E515F3100D22276 /* RecordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EAEE5071E515F3100D22276 /* RecordTableViewCell.xib */; };
@@ -145,9 +156,20 @@
 		5E9F540D1E00DDFF00D1E9C0 /* ChooseCollectionCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChooseCollectionCell.xib; sourceTree = "<group>"; };
 		5E9F54111E00F97800D1E9C0 /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		5E9F541C1E022E1500D1E9C0 /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
-		5EA90DEA1E559B8C00E5E632 /* back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = back.png; sourceTree = "<group>"; };
-		5EA90DEB1E559B8C00E5E632 /* leg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = leg.png; sourceTree = "<group>"; };
-		5EA90DEC1E559B8C00E5E632 /* shoulder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = shoulder.png; sourceTree = "<group>"; };
+		5EA90DEA1E559B8C00E5E632 /* Back.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Back.png; sourceTree = "<group>"; };
+		5EA90DEC1E559B8C00E5E632 /* Shoulder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Shoulder.png; sourceTree = "<group>"; };
+		5EA90DF01E56D3A800E5E632 /* Chest.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Chest.png; sourceTree = "<group>"; };
+		5EA90DF11E56D3A800E5E632 /* Abs.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Abs.png; sourceTree = "<group>"; };
+		5EA90DF21E56D3A800E5E632 /* Quadriceps.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Quadriceps.png; sourceTree = "<group>"; };
+		5EA90DF61E56DAF100E5E632 /* BARBELL BENCH PRESS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BARBELL BENCH PRESS.png"; sourceTree = "<group>"; };
+		5EA90DF71E56DAF100E5E632 /* Bench Press With Dumbbells Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Bench Press With Dumbbells Filled-100.png"; sourceTree = "<group>"; };
+		5EA90DF81E56DAF100E5E632 /* PULL-UP.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "PULL-UP.png"; sourceTree = "<group>"; };
+		5EA90DF91E56DAF100E5E632 /* Pushups Filled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Pushups Filled-100.png"; sourceTree = "<group>"; };
+		5EA90DFA1E56DAF100E5E632 /* SEATED CABLE ROWS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "SEATED CABLE ROWS.png"; sourceTree = "<group>"; };
+		5EA90E001E56DBEA00E5E632 /* BARBELL SQUAT.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BARBELL SQUAT.png"; sourceTree = "<group>"; };
+		5EA90E011E56DBEA00E5E632 /* 屏幕快照 2017-02-17 下午3.19.16.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "屏幕快照 2017-02-17 下午3.19.16.png"; sourceTree = "<group>"; };
+		5EA90E021E56DBEA00E5E632 /* PULLDOWN.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = PULLDOWN.png; sourceTree = "<group>"; };
+		5EA90E031E56DBEA00E5E632 /* BARBELL INCLINE BENCH PRESS.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "BARBELL INCLINE BENCH PRESS.png"; sourceTree = "<group>"; };
 		5EAEE5041E515F1200D22276 /* RecordTable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordTable.swift; sourceTree = "<group>"; };
 		5EAEE5061E515F3100D22276 /* RecordTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RecordTableViewCell.swift; sourceTree = "<group>"; };
 		5EAEE5071E515F3100D22276 /* RecordTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RecordTableViewCell.xib; sourceTree = "<group>"; };
@@ -344,7 +366,6 @@
 		5E9F54101E00F96F00D1E9C0 /* Util */ = {
 			isa = PBXGroup;
 			children = (
-				5E9F541C1E022E1500D1E9C0 /* Extension.swift */,
 				5E0D45161E4C5B4C00914048 /* SweetAlert.swift */,
 				5E9F54111E00F97800D1E9C0 /* Util.swift */,
 				5EBED2831E07D0010039415E /* DataManager.swift */,
@@ -355,6 +376,7 @@
 		5E9F54191E022DEE00D1E9C0 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				5E9F541C1E022E1500D1E9C0 /* Extension.swift */,
 			);
 			name = Extension;
 			sourceTree = "<group>";
@@ -401,9 +423,20 @@
 		5ED745101E4D58D700D7577C /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				5EA90DEA1E559B8C00E5E632 /* back.png */,
-				5EA90DEB1E559B8C00E5E632 /* leg.png */,
-				5EA90DEC1E559B8C00E5E632 /* shoulder.png */,
+				5EA90E001E56DBEA00E5E632 /* BARBELL SQUAT.png */,
+				5EA90E011E56DBEA00E5E632 /* 屏幕快照 2017-02-17 下午3.19.16.png */,
+				5EA90E021E56DBEA00E5E632 /* PULLDOWN.png */,
+				5EA90E031E56DBEA00E5E632 /* BARBELL INCLINE BENCH PRESS.png */,
+				5EA90DF61E56DAF100E5E632 /* BARBELL BENCH PRESS.png */,
+				5EA90DF71E56DAF100E5E632 /* Bench Press With Dumbbells Filled-100.png */,
+				5EA90DF81E56DAF100E5E632 /* PULL-UP.png */,
+				5EA90DF91E56DAF100E5E632 /* Pushups Filled-100.png */,
+				5EA90DFA1E56DAF100E5E632 /* SEATED CABLE ROWS.png */,
+				5EA90DF01E56D3A800E5E632 /* Chest.png */,
+				5EA90DF11E56D3A800E5E632 /* Abs.png */,
+				5EA90DF21E56D3A800E5E632 /* Quadriceps.png */,
+				5EA90DEA1E559B8C00E5E632 /* Back.png */,
+				5EA90DEC1E559B8C00E5E632 /* Shoulder.png */,
 				5EDB7C751E545EB400BE7CA5 /* icon.jpg */,
 				5EDB7C6D1E54541700BE7CA5 /* next.png */,
 				5EAEE50E1E51B16700D22276 /* george.png */,
@@ -569,21 +602,32 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EA90DED1E559B8C00E5E632 /* back.png in Resources */,
+				5EA90DFB1E56DAF100E5E632 /* BARBELL BENCH PRESS.png in Resources */,
+				5EA90DFE1E56DAF100E5E632 /* Pushups Filled-100.png in Resources */,
+				5EA90DED1E559B8C00E5E632 /* Back.png in Resources */,
 				5EDB7C741E54566600BE7CA5 /* DataDetailViewController.xib in Resources */,
 				5E8C330C1E557C9B001BF179 /* HomePageViewController.xib in Resources */,
-				5EA90DEF1E559B8C00E5E632 /* shoulder.png in Resources */,
+				5EA90DFD1E56DAF100E5E632 /* PULL-UP.png in Resources */,
+				5EA90DF31E56D3A800E5E632 /* Chest.png in Resources */,
+				5EA90DF41E56D3A800E5E632 /* Abs.png in Resources */,
+				5EA90DFC1E56DAF100E5E632 /* Bench Press With Dumbbells Filled-100.png in Resources */,
+				5EA90E071E56DBEA00E5E632 /* BARBELL INCLINE BENCH PRESS.png in Resources */,
+				5EA90DEF1E559B8C00E5E632 /* Shoulder.png in Resources */,
+				5EA90DF51E56D3A800E5E632 /* Quadriceps.png in Resources */,
+				5EA90E041E56DBEA00E5E632 /* BARBELL SQUAT.png in Resources */,
 				5E9F540F1E00DDFF00D1E9C0 /* ChooseCollectionCell.xib in Resources */,
 				5EDB7C671E5451B200BE7CA5 /* GraphicDataViewController.xib in Resources */,
+				5EA90E061E56DBEA00E5E632 /* PULLDOWN.png in Resources */,
 				5EDB7C6E1E54541700BE7CA5 /* next.png in Resources */,
-				5EA90DEE1E559B8C00E5E632 /* leg.png in Resources */,
 				5EAEE50F1E51B16700D22276 /* george.png in Resources */,
 				5E9F53D11DFFA38400D1E9C0 /* LaunchScreen.storyboard in Resources */,
+				5EA90DFF1E56DAF100E5E632 /* SEATED CABLE ROWS.png in Resources */,
 				5EDB7C761E545EB400BE7CA5 /* icon.jpg in Resources */,
 				5EDB7C6C1E54523400BE7CA5 /* GraphicDataHomePageTableViewCell.xib in Resources */,
 				5E9F53CE1DFFA38400D1E9C0 /* Assets.xcassets in Resources */,
 				5EAEE5091E515F3100D22276 /* RecordTableViewCell.xib in Resources */,
 				5E9F53CC1DFFA38400D1E9C0 /* Main.storyboard in Resources */,
+				5EA90E051E56DBEA00E5E632 /* 屏幕快照 2017-02-17 下午3.19.16.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

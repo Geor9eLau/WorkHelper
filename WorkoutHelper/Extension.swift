@@ -76,7 +76,7 @@ extension NSCoder {
         return tmpData
     }
     
-    func encodeLegMotions(motions: [LegMotion], forKey:String) {
+    func encodeQuadricepsMotions(motions: [QuadricepsMotion], forKey:String) {
         var tmpData = [String]()
         for motion in motions {
             tmpData.append(motion.rawValue)
@@ -84,11 +84,11 @@ extension NSCoder {
         self.encode(tmpData, forKey: forKey)
     }
     
-    func decodeLegMotions(forKey:String) -> [LegMotion] {
-        var tmpData = [LegMotion]()
+    func decodeQuadricepsMotions(forKey:String) -> [QuadricepsMotion] {
+        var tmpData = [QuadricepsMotion]()
         if let motionsStr = self.decodeObject(forKey: forKey) as? [String] {
             for motionStr in motionsStr {
-                tmpData.append(LegMotion(rawValue: motionStr)!)
+                tmpData.append(QuadricepsMotion(rawValue: motionStr)!)
             }
         }
         return tmpData
@@ -130,6 +130,42 @@ extension NSCoder {
         return tmpData
     }
     
+    func encodeChestMotions(motions: [ChestMotion], forKey:String) {
+        var tmpData = [String]()
+        for motion in motions {
+            tmpData.append(motion.rawValue)
+        }
+        self.encode(tmpData, forKey: forKey)
+    }
+    
+    func decodeChestMotions(forKey:String) -> [ChestMotion] {
+        var tmpData = [ChestMotion]()
+        if let motionsStr = self.decodeObject(forKey: forKey) as? [String] {
+            for motionStr in motionsStr {
+                tmpData.append(ChestMotion(rawValue: motionStr)!)
+            }
+        }
+        return tmpData
+    }
+    
+    func encodeAbsMotions(motions: [AbsMotion], forKey:String) {
+        var tmpData = [String]()
+        for motion in motions {
+            tmpData.append(motion.rawValue)
+        }
+        self.encode(tmpData, forKey: forKey)
+    }
+    
+    func decodeAbsMotions(forKey:String) -> [AbsMotion] {
+        var tmpData = [AbsMotion]()
+        if let motionsStr = self.decodeObject(forKey: forKey) as? [String] {
+            for motionStr in motionsStr {
+                tmpData.append(AbsMotion(rawValue: motionStr)!)
+            }
+        }
+        return tmpData
+    }
+    
     func encodePartMotion(partMotion: PartMotion, forkey:String){
         let tmpStrArr = [partMotion.part.rawValue, partMotion.motionName]
         self.encode(tmpStrArr, forKey: forkey)
@@ -144,12 +180,18 @@ extension NSCoder {
             case .back:
                 let backMotion = BackMotion(rawValue: motionName!)
                 return backMotion
-            case .leg:
-                let legMotion = LegMotion(rawValue: motionName!)
-                return legMotion
+            case .quadriceps:
+                let quadricepsMotion = QuadricepsMotion(rawValue: motionName!)
+                return quadricepsMotion
             case .shoulder:
                 let shoulderMotion = ShoulderMotion(rawValue: motionName!)
                 return shoulderMotion
+            case .abs:
+                let absMotion = AbsMotion(rawValue: motionName!)
+                return absMotion
+            case .chest:
+                let chestMotion = ChestMotion(rawValue: motionName!)
+                return chestMotion
             }
         }
         return nil

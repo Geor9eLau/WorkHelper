@@ -9,16 +9,15 @@
 import Foundation
 import SQLite
 
-public let ALL_BODY_PART_CHOICES: [BodyPart] = [.leg, .shoulder, .back]
+public let ALL_BODY_PART_CHOICES: [BodyPart] = [.quadriceps, .shoulder, .back, .chest, .abs]
 public let ALL_BACK_MOTION_CHOICES: [BackMotion] = [.motion1, .motion2, .motion3]
-public let ALL_LEG_MOTION_CHOICES: [LegMotion] = [.motion1, .motion2, .motion3]
+public let ALL_QUADRICEPS_MOTION_CHOICES: [QuadricepsMotion] = [.motion1]
 public let ALL_SHOULDER_MOTION_CHOICES: [ShoulderMotion] = [.motion1, .motion2, .motion3]
+public let ALL_CHEST_MOTION_CHOICES: [ChestMotion] = [.motion1, .motion2, .motion3, .motion4]
+public let ALL_ABS_MOTION_CHOICES: [AbsMotion] = [.motion1, .motion2, .motion3, .motion4, .motion5]
 
 
-fileprivate let KEY_USER_CHOSEN_PARTS = "USER_CHOSEN_PARTS"
-fileprivate let KEY_USER_CHOSEN_BACK_MOTIONS = "KEY_USER_CHOSEN_BACK_MOTIONS"
-fileprivate let KEY_USER_CHOSEN_LEG_MOTIONS = "KEY_USER_CHOSEN_LEG_MOTIONS"
-fileprivate let KEY_USER_CHOSEN_SHOULDER_MOTIONS = "KEY_USER_CHOSEN_SHOULDER_MOTIONS"
+
 
 public class DataManager: NSObject {
     
@@ -129,10 +128,14 @@ public class DataManager: NSObject {
                     switch part {
                     case .back:
                         motion = BackMotion(rawValue: motionName)!
-                    case .leg:
-                        motion = LegMotion(rawValue: motionName)!
+                    case .quadriceps:
+                        motion = QuadricepsMotion(rawValue: motionName)!
                     case .shoulder:
                         motion = ShoulderMotion(rawValue: motionName)!
+                    case .abs:
+                        motion = AbsMotion(rawValue: motionName)!
+                    case .chest:
+                        motion = ChestMotion(rawValue: motionName)!
                     }
                     
                     let record = Record(motion: motion)
@@ -178,8 +181,9 @@ public class DataManager: NSObject {
                 for record in recordsArr{
 //                    let attributedStr = NSAttributedString(string: "\(record.get(totalRepeats)) \(record.get(motionTypeName))", attributes: [n])
                     recordDecp.append("\(record.get(totalRepeats)) \(record.get(motionTypeName)) \n")
+                    print("#$%^&*()")
                 }
-                if recordDecp.characters.count > "You've finished ".characters.count{
+                if recordDecp.characters.count > "You've finished: \n".characters.count{
                     return recordDecp
                 }else{
                     return "Have no record~"

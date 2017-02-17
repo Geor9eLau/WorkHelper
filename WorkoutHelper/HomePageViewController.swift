@@ -81,7 +81,7 @@ class HomePageViewController: BaseViewController, iCarouselDataSource, iCarousel
             //don't do anything specific to the index within
             //this `if ... else` statement because the view will be
             //recycled and used with other index values later
-            itemView = CarouselItemView(frame: CGRect(x: 0, y: 0, width: 200, height: 200))
+            itemView = CarouselItemView(frame: CGRect(x: 0, y: 0, width: 150, height: 150))
         }
         itemView.imgView.image = UIImage(named: part.rawValue)
         itemView.titleLbl.text = part.rawValue

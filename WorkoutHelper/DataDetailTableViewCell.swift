@@ -40,7 +40,7 @@ class DataDetailTableViewCell: UITableViewCell {
             for training in records{
                 tmpY.append(CGFloat(training.maxWeight))
                 let tmpDate = Util.transformDateToDateStr(date: training.date)
-                let index = tmpDate.index(tmpDate.startIndex, offsetBy: 4)
+                let index = tmpDate.index(tmpDate.startIndex, offsetBy: 5)
                 tmpX.append(tmpDate.substring(from: index))
             }
         case .repeats:
@@ -48,7 +48,7 @@ class DataDetailTableViewCell: UITableViewCell {
                 tmpY.append(CGFloat(training.totoalRepeats))
 //                tmpX.append(Util.transformDateToDateStr(date: training.date))
                 let tmpDate = Util.transformDateToDateStr(date: training.date)
-                let index = tmpDate.index(tmpDate.startIndex, offsetBy: 4)
+                let index = tmpDate.index(tmpDate.startIndex, offsetBy: 5)
                 tmpX.append(tmpDate.substring(from: index))
             }
         case .time:
@@ -56,7 +56,7 @@ class DataDetailTableViewCell: UITableViewCell {
                 tmpY.append(CGFloat(training.totalTimeConsuming))
 //                tmpX.append(Util.transformDateToDateStr(date: training.date))
                 let tmpDate = Util.transformDateToDateStr(date: training.date)
-                let index = tmpDate.index(tmpDate.startIndex, offsetBy: 4)
+                let index = tmpDate.index(tmpDate.startIndex, offsetBy: 5)
                 tmpX.append(tmpDate.substring(from: index))
             }
         default:

@@ -59,7 +59,9 @@ class CustomChooseView: UIView, UICollectionViewDataSource, UICollectionViewDele
             switch self.part{
             case .back: return ALL_BACK_MOTION_CHOICES
             case .shoulder: return ALL_SHOULDER_MOTION_CHOICES
-            case .leg: return ALL_LEG_MOTION_CHOICES
+            case .quadriceps : return ALL_QUADRICEPS_MOTION_CHOICES
+            case .chest: return ALL_CHEST_MOTION_CHOICES
+            case .abs: return ALL_ABS_MOTION_CHOICES
             }
         }()
         colltectionView.reloadData()
